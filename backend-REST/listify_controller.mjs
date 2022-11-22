@@ -12,3 +12,17 @@ app.use(express.json());
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}...`);
 });
+
+
+// CREATE endpoint for DB
+app.post('/test', (req, res) => {   
+    
+    let test = req.body.text
+    test +=  '.POST'
+
+    res.status(201).json(test)
+})
+
+
+
+
