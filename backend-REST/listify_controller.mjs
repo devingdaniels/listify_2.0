@@ -15,10 +15,10 @@ app.listen(PORT, () => {
 
 
 // CREATE endpoint for DB
-app.post('/test', (req, res) => {   
+app.post('/api/add_project', (req, res) => {   
     
     let test = req.body.text
-    test +=  '.POST'
+    test +=  '.this is from post'
 
     res.status(201).json(test)
 })
