@@ -22,25 +22,35 @@ db.once("open", (err) => {
 
 // Each schema maps to a MongoDB collection and defines the shape of the documents within that collection.
 const { Schema } = mongoose;
-const projectSchema = new Schema({
-    title: String,
-    tasks: [{ title: String, date: Date, comment: String, isComplete: Boolean }]
-});
 
-// To use our schema definition, we need to convert our projectSchema into a Model we can work with.
-const Project = mongoose.model('Project', projectSchema);
+// Schema for a user of the app
+const UserSchema = new mongoose.Schema({
+    fName: String, 
+    lName: String,
+    email: String,
+    password: String
+})
 
+// Models are fancy constructors compiled from
+// Schema definitions. An instance of a model is called a
+// document. Models are responsible for creating and
+// reading documents from the underlying MongoDB database.
 
-const createProject = async (title, tasks) => { 
-    const project = new Project({
-        title: title, 
-        tasks: tasks
-    })
-    return project.save()
+// ('nameOfModel', model, 'nameOfCollection)
+const User = mongoose.model('UserInfo', UserSchema, 'user_login_info')
+
+// CREATE model *****************************************
+const createUser = async (fName, lName, email, password) => {
+    const user = new User({ 
+        fName: fName, 
+        lName: lName, 
+        email: email,
+        password: password,        
+    });
+    return user.save();
 }
 
 
 
 
-
-export { createProject}
+export { createUser }
