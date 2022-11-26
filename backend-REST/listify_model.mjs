@@ -27,7 +27,10 @@ const { Schema } = mongoose;
 const UserSchema = new mongoose.Schema({
     fName: String, 
     lName: String,
-    email: String,
+    email:  {
+            type: String, 
+            unique: true
+        },
     password: String
 })
 
@@ -53,4 +56,13 @@ const createUser = async (fName, lName, email, password) => {
 
 
 
-export { createUser }
+/*  FIND METHODS*/
+const findByEmail = async (email) => { 
+    const query = User.findOne(email);
+    return query.exec();
+}
+
+
+
+
+export { createUser, findByEmail }
