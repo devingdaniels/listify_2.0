@@ -9,13 +9,18 @@ import bcrypt from 'bcrypt'
 const PORT = process.env.PORT; 
 const app = express();
 
+
+app.listen(PORT, () => {
+    console.log(`Express server live and listening on port ${PORT}...`);
+});
+
 // Middleware function to parse PUT and POST requests 
 app.use(express.json());
 
-// For hosting, ensure to npm install cors and add function
+// For HOSTING, ensure to npm install cors and add function
 
 
-/* CREATE NEW USER ENDPOINT */
+/* REGISTER NEW USER ROUTE */
 app.post('/api/register_user', async (req, res) => {
     // Store data from client (should validate....)    
     const { fName, lName, email, password } = req.body
@@ -29,8 +34,7 @@ app.post('/api/register_user', async (req, res) => {
     else {
         // Create a new user in ListiFy database, in the user_login_info collection
         try {
-            const response = await mongoMethods.createUser(fName, lName, email, encryptedPassword)
-            console.log(response)
+            const response = await mongoMethods.createUser(fName, lName, email, encryptedPassword)            
             res.status(201).json({ status: 'User added successfully' })
         }
         catch (err) {
@@ -40,22 +44,22 @@ app.post('/api/register_user', async (req, res) => {
     }
 })
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}...`);
-});
-
-
-
+/* LOGIN EXISTING USER ROUTE */
+app.post('/api/login_user', async (req, res) => {
+    const { email, password } = req.body
+    // Check for user email
+    const user = await mongoMethods.findByEmail({ email: email })
+    if (user) {
+        if (bcrypt.compareSync(password, user.password)) {
+            return res.json({
+                status: 'User login success', data: {
+                    name: user.fName,
+                    email: user.email
+            } })
+        } else { 
+            return res.send({status: 'Passwords do not match'})
+        }                
+    } else {
+        return res.send({status: 'User not found'})
+    }
+})

@@ -31,9 +31,7 @@ const SignupPage = () => {
     if (data.status === 'User added successfully') {
       console.log(data)
       // Navigate back to login
-      navigate('/')
-        
-        
+      navigate('/')                
     }
     else if (data.status === 'User already exists.') {
       console.log(data)
@@ -46,7 +44,6 @@ const SignupPage = () => {
     }
   }
   
-
   return (
     <div className='signupContainer'>
       <h2>Sign In</h2>
@@ -66,6 +63,7 @@ const SignupPage = () => {
         
         <button type='submit'>Login</button>
       </form>
+      <button onClick={()=>navigate('/')}>Sign in</button>
     </div>
   )
 }
