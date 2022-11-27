@@ -7,9 +7,14 @@ import { Routes, Route } from 'react-router-dom'
 
 // Components
 import Header from './components/Header'
-import LoginPage from './pages/LoginPage'
 import Footer from './components/Footer'
+
+
+// Pages
+import LoginPage from './pages/LoginPage'
 import SignupPage from './pages/SignupPage';
+import ListiFy from './pages/ListiFy'
+
 
 
 function App() {
@@ -17,8 +22,9 @@ function App() {
     <>
       <Header/>
       <Routes>
-        <Route path='/' element={<LoginPage />} />
-        <Route path='/signupPage' element={<SignupPage />} />
+        <Route path='/' element={<LoginPage/>}/>
+        <Route path='/signupPage' element={<SignupPage/>}/>
+        <Route path='/listiFy' element={<ListiFy/>}/>
       </Routes>
       {/* <Footer /> */}
     </>

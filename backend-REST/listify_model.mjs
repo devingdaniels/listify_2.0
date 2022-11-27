@@ -21,8 +21,6 @@ db.once("open", (err) => {
 
 
 // Each schema maps to a MongoDB collection and defines the shape of the documents within that collection.
-const { Schema } = mongoose;
-
 // Schema for a user of the app
 const UserSchema = new mongoose.Schema({
     fName: String, 
@@ -32,6 +30,8 @@ const UserSchema = new mongoose.Schema({
             unique: true
         },
     password: String
+}, {
+    timestamps: true
 })
 
 // Models are fancy constructors compiled from

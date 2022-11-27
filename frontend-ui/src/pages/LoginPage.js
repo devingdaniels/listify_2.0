@@ -30,7 +30,8 @@ function LoginPage() {
     const data = await response.json()
     // Check for successful verification
       if (data.status === 'User login success') {
-        console.log(data)
+        console.log(data.status)
+        navigate('/listiFy', {state: {name: data.user.name, email: data.user.email}})
       }
       else if (data.status === 'Passwords do not match') {
         console.log(data)
