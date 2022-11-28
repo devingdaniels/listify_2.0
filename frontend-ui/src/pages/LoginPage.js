@@ -49,12 +49,12 @@ function LoginPage() {
       <h2>Sign In</h2>
       <form onSubmit={handleLogin}>
         <label htmlFor="email">Email Address</label>
-        <input type="email" name="email" id="email" placeholder='Enter email' onChange={(e)=> setEmail(e.target.value)} />
+        <input type="email" name="email" id="email" placeholder='Enter email' required onChange={(e)=> setEmail(e.target.value)} />
         <label htmlFor="password">Password</label>
-        <input type="password" name='password' id='password' placeholder='Enter password' onChange={(e) => setPassword(e.target.value)} />      
-        <button type='submit'>Login</button>        
+        <input type="password" name='password' id='password' placeholder='Enter password' required onChange={(e) => setPassword(e.target.value)} />      
+        <button type='submit'>Login</button>
       </form>
-      <button onClick={()=> navigate('/signupPage')}>Sign Up</button>
+      <p>Don't have an account? <button onClick={() => navigate('/signupPage')}>Sign Up</button> </p>
     </div>
   )
 }

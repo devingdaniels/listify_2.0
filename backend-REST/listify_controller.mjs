@@ -27,7 +27,8 @@ app.post('/api/register_user', asyncHandler( async (req, res) => {
     // Store data from client (should validate....)    
     const { fName, lName, email, password } = req.body
     // Encrypt the user password
-    const encryptedPassword = await bcrypt.hash(password, 10)
+    const salt = await bcrypt.genSalt(10)
+    const encryptedPassword = await bcrypt.hash(password, salt)
      // Ensure email is not already in DB
     const existingUser = await mongoMethods.findByEmail({ email: email })      
     if (existingUser) {
@@ -41,7 +42,7 @@ app.post('/api/register_user', asyncHandler( async (req, res) => {
             res.status(201).json({ status: 'User added successfully', token: generateToken(response._id) })
         }
         catch (err) {            
-            res.status(400).json({ status: 'Registration error occurred. Please tty again' })
+            res.status(400).json({ status: 'Registration error occurred. Please try again' })
             throw new Error('Something went wrong in /api/register_user ')
         }
     }
@@ -53,7 +54,7 @@ app.post('/api/login_user', asyncHandler(async (req, res) => {
     // Check for user email
     const user = await mongoMethods.findByEmail({ email: email })
     if (user) {
-        if (bcrypt.compareSync(password, user.password)) {
+        if(await bcrypt.compare(password, user.password)) {
              res.json({
                 status: 'User login success', token: generateToken(user._id), user: {
                     name: user.fName,
@@ -67,12 +68,12 @@ app.post('/api/login_user', asyncHandler(async (req, res) => {
     } else {
         res.status(400)
         res.send({ status: 'User not found' })
-        throw new Error('User not found in DateBase')
+        throw new Error('User not found')
     }
 }))
 
 /*  METHODS */
 const generateToken = (id) => { 
     // Pass payload (id), and the secret
-    return jwt.sign({}, process.env.JWT_SECRET, {expiresIn: '7d'})
+    return jwt.sign({id}, process.env.JWT_SECRET, {expiresIn: '7d'})
 }

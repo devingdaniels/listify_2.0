@@ -46,7 +46,7 @@ const SignupPage = () => {
   
   return (
     <div className='signupContainer'>
-      <h2>Sign In</h2>
+      <h2>Register</h2>
       <form onSubmit={handleLogin}>
 
         <label htmlFor="fname">First Name</label>
@@ -61,7 +61,7 @@ const SignupPage = () => {
         <label htmlFor="password">Password</label>
         <input type="password" name='password' id='password' placeholder='Enter password' required onChange={(e) => setPassword(e.target.value)} />    
         
-        <button type='submit'>Login</button>
+        <button type='submit'>Create Account</button>
       </form>
       <button onClick={()=>navigate('/')}>Sign in</button>
     </div>
