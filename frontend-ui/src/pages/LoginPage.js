@@ -1,7 +1,10 @@
-import React from 'react'
-import { useState } from 'react'
-
+// Dependencies
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+// Components
+import Header from '../components/Header'
+// Icons
+import { BsPersonCircle} from 'react-icons/bs'
 
 function LoginPage() {
   // State variables 
@@ -40,22 +43,28 @@ function LoginPage() {
         console.log(data)
       }
     } catch (error) {
-      console.log('Something went wrong in Login handle function')
+      console.log('Something went wrong in handleLogin function')
     }
 }
 
   return (
+<>
+      <Header icon={<BsPersonCircle />} text={'Register'} navigate={ '/signupPage' } />
     <div className='loginContainer'>
       <h2>Sign In</h2>
-      <form onSubmit={handleLogin}>
+        <form onSubmit={handleLogin}>
+          
         <label htmlFor="email">Email Address</label>
-        <input type="email" name="email" id="email" placeholder='Enter email' required onChange={(e)=> setEmail(e.target.value)} />
+        <input type="email" name="email" id="email" placeholder='Enter email' required onChange={(e) => setEmail(e.target.value)} />
+          
         <label htmlFor="password">Password</label>
-        <input type="password" name='password' id='password' placeholder='Enter password' required onChange={(e) => setPassword(e.target.value)} />      
-        <button type='submit'>Login</button>
+        <input type="password" name='password' id='password' placeholder='Enter password' required onChange={(e) => setPassword(e.target.value)} />
+          
+          <button type='submit'>Login</button>
+          
       </form>
-      <p>Don't have an account? <button onClick={() => navigate('/signupPage')}>Sign Up</button> </p>
-    </div>
+      </div>
+      </>
   )
 }
 

@@ -1,13 +1,24 @@
 import React from 'react'
-import {BsCheck2Circle } from 'react-icons/bs'
+import { BsCheck2Circle} from 'react-icons/bs'
+import { useNavigate } from 'react-router-dom'
 
-const Header = () => {
+
+const Header = (props) => {
+  const navigate = useNavigate()
+
+
   return (
-    <header>
-      <BsCheck2Circle size={ 40 } />
-      <h1>ListiFy</h1>
+    <header className='loginHeader'>
+      <div >
+        <BsCheck2Circle size={ 40 } />
+        <h1>ListiFy</h1>
+      </div>
+      <div className='headerNavContainer' onClick={() => navigate(props.navigate)}>{props.icon}<span>{ props.text}</span></div>
     </header>
   )
 }
+
+
+
 
 export default Header

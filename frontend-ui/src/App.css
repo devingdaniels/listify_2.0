@@ -37,13 +37,41 @@ a {
   text-decoration: none;
 }
 
+label {
+  display: block;
+}
+
+.headerNavContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.headerNavContainer span {
+  margin-left: 7px;
+}
+
 /* LOGIN PAGE */
+
+.loginHeader {
+  display: flex;
+  justify-content: space-between;
+}
 
 .loginContainer h2 {
   text-align: center;
 }
 
 .loginContainer form {
+  display: flex;
+  flex-direction: column;
+  max-width: 35vw;
+  height: 50vh;
+  margin: 0 auto;
+  padding: 1%;
+}
+
+.signupContainer {
   display: flex;
   flex-direction: column;
   max-width: 35vw;

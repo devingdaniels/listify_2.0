@@ -20,7 +20,6 @@ import ListiFy from './pages/ListiFy'
 function App() {
   return (
     <>
-      <Header/>
       <Routes>
         <Route path='/' element={<LoginPage/>}/>
         <Route path='/signupPage' element={<SignupPage/>}/>

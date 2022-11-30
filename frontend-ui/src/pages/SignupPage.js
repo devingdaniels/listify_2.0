@@ -1,6 +1,9 @@
 import React from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { CiLogin } from 'react-icons/ci'
+
+import Header from '../components/Header'
 
 const SignupPage = () => {
   const navigate = useNavigate()
@@ -45,13 +48,16 @@ const SignupPage = () => {
   }
   
   return (
+
+    <>
+      <Header icon={<CiLogin />} text={'Login'} navigate={ '/'} />
     <div className='signupContainer'>
       <h2>Register</h2>
       <form onSubmit={handleLogin}>
-
+        <div>
         <label htmlFor="fname">First Name</label>
         <input type="text" name="fname" id="fname" placeholder='Enter first name' required onChange={(e) => setFname(e.target.value)} />
-
+        </div>
         <label htmlFor="lname">Last Name</label>
         <input type="text" name="lname" id="lname" placeholder='Enter last name' required onChange={(e) => setLname(e.target.value)} />
 
@@ -62,9 +68,9 @@ const SignupPage = () => {
         <input type="password" name='password' id='password' placeholder='Enter password' required onChange={(e) => setPassword(e.target.value)} />    
         
         <button type='submit'>Create Account</button>
-      </form>
-      <button onClick={()=>navigate('/')}>Sign in</button>
-    </div>
+      </form>      
+      </div>
+      </>
   )
 }
 
