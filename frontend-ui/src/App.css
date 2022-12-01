@@ -13,15 +13,16 @@ body {
   font-family: "Fira Sans", sans-serif;
 }
 
-main {
-  display: grid;
-}
-
 header {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  padding: 1%;
+  padding: 1% 5%;
+}
+
+header div {
+  display: flex;
+  align-items: center;
 }
 
 nav {
@@ -41,41 +42,28 @@ label {
   display: block;
 }
 
+button {
+  display: block;
+}
+
 .headerNavContainer {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 .headerNavContainer span {
-  margin-left: 7px;
+  margin-left: 3px;
 }
 
 /* LOGIN PAGE */
 
-.loginHeader {
-  display: flex;
-  justify-content: space-between;
-}
-
-.loginContainer h2 {
-  text-align: center;
-}
-
-.loginContainer form {
+.getUserDetailsForm {
   display: flex;
   flex-direction: column;
   max-width: 35vw;
-  height: 50vh;
   margin: 0 auto;
   padding: 1%;
-}
-
-.signupContainer {
-  display: flex;
-  flex-direction: column;
-  max-width: 35vw;
-  height: 50vh;
-  margin: 0 auto;
-  padding: 1%;
+  max-width: 25vw;
 }

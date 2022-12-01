@@ -51,7 +51,7 @@ const SignupPage = () => {
 
     <>
       <Header icon={<CiLogin />} text={'Login'} navigate={ '/'} />
-    <div className='signupContainer'>
+    <div className='getUserDetailsForm'>
       <h2>Register</h2>
       <form onSubmit={handleLogin}>
         <div>

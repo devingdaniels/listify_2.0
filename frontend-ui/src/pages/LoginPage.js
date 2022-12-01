@@ -50,7 +50,7 @@ function LoginPage() {
   return (
 <>
       <Header icon={<BsPersonCircle />} text={'Register'} navigate={ '/signupPage' } />
-    <div className='loginContainer'>
+    <div className='getUserDetailsForm'>
       <h2>Sign In</h2>
         <form onSubmit={handleLogin}>
           
