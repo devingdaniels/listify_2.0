@@ -46,6 +46,14 @@ button {
   display: block;
 }
 
+form {
+}
+
+input,
+label {
+  margin: 1%;
+}
+
 .headerNavContainer {
   display: flex;
   justify-content: center;
