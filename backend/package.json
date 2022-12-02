@@ -2,9 +2,9 @@
   "name": "backend-rest",
   "version": "1.0.0",
   "description": "",
-  "main": "listify_controller.mjs",
+  "main": "server.js",
   "scripts": {
-    "start": "nodemon listify-controller.mjs"
+    "start": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",

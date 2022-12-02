@@ -42,6 +42,8 @@ const UserSchema = new mongoose.Schema({
 // ('nameOfModel', model, 'nameOfCollection)
 const User = mongoose.model('UserInfo', UserSchema, 'user_login_info')
 
+
+
 // CREATE model *****************************************
 const createUser = async (fName, lName, email, password) => {
     const user = new User({ 
@@ -53,16 +55,10 @@ const createUser = async (fName, lName, email, password) => {
     return user.save();
 }
 
-
-
-
 /*  FIND METHODS*/
 const findByEmail = async (email) => { 
     const query = User.findOne(email);
     return query.exec();
 }
-
-
-
 
 export { createUser, findByEmail }
