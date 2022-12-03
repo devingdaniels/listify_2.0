@@ -2,17 +2,25 @@ const express = require('express')
 const dotenv = require('dotenv').config()
 const port = process.env.PORT
 
-// Error handler
-const { errorHandler } = require('./middleware/errorMiddleware')
-
 // Instance of express
 const app = express()
 
-// Middleware function in order to compartmentalize routes 
+// Import database connect
+const { connectDB } = require('./config/db')
+connectDB()
+
+// Error handler
+const { errorHandler } = require('./middleware/errorMiddleware')
+
+
+// Middleware
+// express.json() and express.urlencoded are middleware functions that help handle PUT and POST requests as these types have data in the body. Inform express that it is a JSON Object
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
-app.use('/api/projects', require('./routes/projectRoutes'))
 app.use(errorHandler)
+// Routes
+app.use('/api/projects', require('./routes/projectRoutes'))
+
 app.listen(port, () => {
     console.log(`Express listening on port: ${port}`);
 });
