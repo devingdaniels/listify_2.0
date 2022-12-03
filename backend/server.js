@@ -13,15 +13,16 @@ connectDB()
 const { errorHandler } = require('./middleware/errorMiddleware')
 
 
-// Middleware
 // express.json() and express.urlencoded are middleware functions that help handle PUT and POST requests as these types have data in the body. Inform express that it is a JSON Object
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
-app.use(errorHandler)
+
 // Routes
 app.use('/api/projects', require('./routes/projectRoutes'))
 app.use('/api/users', require('./routes/userRoutes'))
 
+// Error middleware needs to be last .use()
+app.use(errorHandler)
 app.listen(port, () => {
     console.log(`Express listening on port: ${port}`);
 });
