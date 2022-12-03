@@ -1,11 +1,22 @@
 const express = require('express')
 const dotenv = require('dotenv').config()
+const port = process.env.PORT
+
+// Error handler
+const { errorHandler } = require('./middleware/errorMiddleware')
 
 // Instance of express
 const app = express()
 
 // Middleware function in order to compartmentalize routes 
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
 app.use('/api/projects', require('./routes/projectRoutes'))
+app.use(errorHandler)
+app.listen(port, () => {
+    console.log(`Express listening on port: ${port}`);
+});
+
 
 
 // // Password hashing library
@@ -17,9 +28,7 @@ app.use('/api/projects', require('./routes/projectRoutes'))
 // const app = express();
 
 
-app.listen(process.env.PORT, () => {
-    console.log(`Express server live and listening on port ${process.env.PORT}...`);
-});
+
 
 // // Middleware function to parse PUT and POST requests 
 // app.use(express.json());

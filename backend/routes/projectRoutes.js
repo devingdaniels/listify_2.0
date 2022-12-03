@@ -5,10 +5,8 @@ const { getProjects, createProject, updateProject, deleteProject } = require('..
 
 router.get('/', getProjects)
 router.post('/', createProject)
-router.put('/', updateProject)
-router.delete('/', deleteProject)
-
-
+router.put('/:id', updateProject)
+router.delete('/:id', deleteProject)
 
 
 module.exports = router;
