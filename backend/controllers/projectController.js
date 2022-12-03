@@ -15,8 +15,8 @@ const getProjects = asyncHandler(async (req, res) => {
 // @desc    Create a project
 // @route   POST /api/projects
 // @access  Private
-const createProject =asyncHandler(async (req, res) => { 
-    if (!RegExp.body.text) {
+const createProject = asyncHandler(async (req, res) => { 
+    if (!req.body.text) {
         res.status(400)
         throw new Error('Missing text field from req')
     }       
@@ -26,7 +26,7 @@ const createProject =asyncHandler(async (req, res) => {
 // @desc    Update project
 // @route   PUT /api/projects/:id
 // @access  Private
-const updateProject =asyncHandler(async (req, res) => { 
+const updateProject = asyncHandler(async (req, res) => { 
     res.status(200).json({message: `Update project ${req.params.id}`})
 })
 

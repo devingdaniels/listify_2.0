@@ -20,6 +20,7 @@ app.use(express.urlencoded({ extended: false }))
 app.use(errorHandler)
 // Routes
 app.use('/api/projects', require('./routes/projectRoutes'))
+app.use('/api/users', require('./routes/userRoutes'))
 
 app.listen(port, () => {
     console.log(`Express listening on port: ${port}`);
