@@ -8,7 +8,4 @@ router.post('/login', loginUser)
 // Ensures private routes are protected using JWT
 router.get('/me', protect, getMe)
 
-
-
-
 module.exports = router;

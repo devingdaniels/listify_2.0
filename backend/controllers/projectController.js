@@ -1,25 +1,42 @@
 // Imports
 const asyncHandler = require('express-async-handler')
 
-// Database
+// Database model 
 const Project = require('../models/projectModel')
 
 // @desc    Get a project
 // @route   GET /api/projects
 // @access  Private
 const getProjects = asyncHandler(async (req, res) => { 
-    const projects = await Project.find()
+    // Return goals assigned to current user in req object
+    const projects = await Project.find({user: req.user.id})
     res.status(200).json(projects)
 })
 
 // @desc    Create a project
 // @route   POST /api/projects
 // @access  Private
-const createProject = asyncHandler(async (req, res) => { 
-    if (!req.body.text) {
+const createProject = asyncHandler(async (req, res) => {
+    console.log(req.body.title)
+    if (!req.body.title) {
         res.status(400)
-        throw new Error('Missing text field from req')
-    }       
+        throw new Error('Project needs a title')
+    }      
+    // Create a new project linked to current user
+    const project = await Project.create({
+        user: req.user.id,
+        title: req.body.title,
+        tasks: []
+    })
+    // Ensure successful project creation in DB
+    if (!project) { 
+        res.status(400).json({ message: "Error creating new project" })
+        throw new Error('Error creating new project')
+    }
+
+    res.status(200).json({project})
+
+
 })
 
 

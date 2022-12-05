@@ -8,7 +8,7 @@ const User = require('../models/userModel')
 // @access  public
 const registerUser = asyncHandler(async (req, res) => {
     const { fname, lname, email, password } = req.body
-    // Verify valid data from client
+    // Verify data from client
     if (!fname || !lname || !email || !password) {
         res.status(400)
         throw new Error('Missing field')
@@ -33,7 +33,7 @@ const registerUser = asyncHandler(async (req, res) => {
     if (user){
         res.status(201).json({
             _id: user._id,
-            name: user.fname + '' + user.lname,
+            name: user.fname + ' ' + user.lname,
             email: user.email,
             token: generateToken(user._id)
         })
@@ -71,8 +71,7 @@ const loginUser = asyncHandler(async (req, res) => {
 // @route   GET /api/users/me
 // @access  Public
 const getMe = asyncHandler(async (req, res) => { 
-    
-    console.log(req.user)
+        
     const { _id, fname, lname, email } = await User.findById(req.user.id)
     
     res.status(200).json({

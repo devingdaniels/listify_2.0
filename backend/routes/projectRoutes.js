@@ -3,8 +3,10 @@ const router = express.Router()
 const { getProjects, createProject, updateProject, deleteProject } = require('../controllers/projectController')
 
 
-router.get('/', getProjects)
-router.post('/', createProject)
+const { protect } = require('../middleware/authMiddleware')
+
+router.get('/', protect, getProjects)
+router.post('/', protect, createProject)
 router.put('/:id', updateProject)
 router.delete('/:id', deleteProject)
 
