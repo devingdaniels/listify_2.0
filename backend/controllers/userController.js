@@ -52,7 +52,7 @@ const loginUser = asyncHandler(async (req, res) => {
 
     // Check if user exists
     const user = await User.findOne({ email })
-    
+        
     if (user && await bcrypt.compare(password, user.password,)) {
         res.json({
             _id: user._id,
@@ -70,9 +70,15 @@ const loginUser = asyncHandler(async (req, res) => {
 // @desc    Get a user's data
 // @route   GET /api/users/me
 // @access  Public
-const getMe =  asyncHandler(async (req, res) => { 
-    res.json({
-        message: 'Get the current user'
+const getMe = asyncHandler(async (req, res) => { 
+    
+    console.log(req.user)
+    const { _id, fname, lname, email } = await User.findById(req.user.id)
+    
+    res.status(200).json({
+        id: _id,
+        name: fname + ' ' + lname,
+        email: email
     })
 })
 
