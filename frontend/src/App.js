@@ -13,7 +13,7 @@ import Footer from './components/Footer'
 // Pages
 import LoginPage from './pages/LoginPage'
 import SignupPage from './pages/SignupPage';
-import ListiFy from './pages/ListiFy'
+import DashBoard from './pages/DashBoard'
 
 
 
@@ -23,7 +23,7 @@ function App() {
       <Routes>
         <Route path='/' element={<LoginPage/>}/>
         <Route path='/signupPage' element={<SignupPage/>}/>
-        <Route path='/listiFy' element={<ListiFy/>}/>
+        <Route path='/listiFy' element={<DashBoard/>}/>
       </Routes>
       {/* <Footer /> */}
     </>

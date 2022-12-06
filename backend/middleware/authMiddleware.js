@@ -2,10 +2,10 @@ const jwt = require('jsonwebtoken')
 const asyncHandler = require('express-async-handler')
 const User = require('../models/userModel')
 
-// Check for authorization header
-// Make sure it's a Bearer token
+// Check for authorization header attribute
+// Ensure Bearer token exists 
 // Save the token, decode, and get user from payload(id in token)
-// If there is a problem or no token, not auth
+// If problem or no token, no auth
 
 const protect = asyncHandler(async(req, res, next) => { 
     let token
