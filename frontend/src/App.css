@@ -11,6 +11,7 @@ body {
   background-color: rgb(12, 15, 24);
   font: 1rem;
   font-family: "Fira Sans", sans-serif;
+  height: 100vh;
 }
 
 header {
@@ -43,23 +44,8 @@ a {
   text-decoration: none;
 }
 
-label {
-  display: block;
-}
-
 li {
   list-style: none;
-}
-
-button {
-  /* display: block; */
-}
-
-form {
-}
-
-input,
-label {
 }
 
 .headerNavContainer {
@@ -75,7 +61,7 @@ label {
 
 /* LOGIN PAGE */
 
-form {
+.loadingSpinner {
+  max-width: max-content;
   margin: auto;
-  width: 30vw;
 }

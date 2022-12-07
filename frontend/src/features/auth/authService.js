@@ -18,7 +18,7 @@ const register = async (userData) => {
 // Login user
 const login = async (userData) => { 
     const response = await axios.post(API_URL + 'login', userData)
-    // Axios automatically puts data object into response
+    // Axios automatically puts data object into response (don't have to await .json())
     // Ensure good response
     if (response.data) {
         // Set local storage with user data 
@@ -31,7 +31,7 @@ const login = async (userData) => {
 
 // Logout user
 const logout = async () => { 
-    // Remove the user from the locale storage
+    // Remove the user from the local storage
     localStorage.removeItem('user')
 }
 

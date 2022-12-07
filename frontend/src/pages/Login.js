@@ -72,6 +72,7 @@ const Login = () => {
         <input
           type="email"
           name="email"
+          value={ email}
           id="email"
           placeholder='Enter email'
           required

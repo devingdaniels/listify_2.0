@@ -44,9 +44,6 @@ export const logout = createAsyncThunk('auth/logout', async () => {
     await authService.logout()
 })
 
-
-
-
 // Reducers are not async (not Thunk Functions)
 export const authSlice = createSlice({
     name: 'auth',
@@ -63,6 +60,23 @@ export const authSlice = createSlice({
     extraReducers: (builder) => { 
         builder
 
+        // Login Cases
+            .addCase(login.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(login.fulfilled, (state, action) => { 
+                state.isLoading = false
+                state.isSuccess = true
+                state.user = action.payload
+            })
+            .addCase(login.rejected, (state, action) => { 
+                state.isLoading = false
+                state.isError = true
+                // action.payload comes from register function, thunkAPI.rejectWithValue in register function
+                state.message = action.payload
+                // Something went wrong during registration
+                state.user = null
+            })
         // Register Cases
             .addCase(register.pending, (state) => {
                 state.isLoading = true
@@ -84,27 +98,8 @@ export const authSlice = createSlice({
             .addCase(logout.fulfilled, (state) => { 
                 state.user = null
             })
-        // Login Cases
-            .addCase(login.pending, (state) => {
-                state.isLoading = true
-            })
-            .addCase(login.fulfilled, (state, action) => { 
-                state.isLoading = false
-                state.isSuccess = true
-                state.user = action.payload
-            })
-            .addCase(login.rejected, (state, action) => { 
-                state.isLoading = false
-                state.isError = true
-                // action.payload comes from register function, thunkAPI.rejectWithValue in register function
-                state.message = action.payload
-                // Something went wrong during registration
-                state.user = null
-            })
-        
     }
 })
-
 
 // Need this line to export reset
 export const { reset } = authSlice.actions
