@@ -1,6 +1,15 @@
-// Dependencies
-import React, { useState } from 'react'
+// React
+import { useState,  useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+
+// Auth
+import { login, reset } from '../features/auth/authSlice'
+import { useSelector, useDispatch } from 'react-redux'
+// Notifications
+import { toast } from 'react-toastify'
+// Spinner
+import Spinner from '../components/Spinner'
+
 
 const Login = () => {  
   // State variables 
@@ -9,7 +18,13 @@ const Login = () => {
     password: '',    
   })
   
+  // Destructure state
+  const { email, password } = formData
+
+  //
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth)
 
   const onChange = (e) => { 
     setFormData((prevState) => ({
@@ -18,11 +33,36 @@ const Login = () => {
     }))
   }
 
-  const onSubmit = () => { 
+  useEffect(() => {
+    // First check for errors
+    if (isError) { 
+      toast.error(message)
+    }
 
+    if (isSuccess || user) { 
+      navigate('/dashboard')
+    }
+
+    // Reset the state
+    dispatch(reset())
+
+  }, [user, isError, isSuccess, message, navigate, dispatch])
+
+
+  if (isLoading) { 
+    return <Spinner/>
   }
 
-  
+  const onSubmit = (e) => { 
+    e.preventDefault()
+
+    const userData = {
+      email,
+      password
+    }
+
+    dispatch(login(userData))
+  }
 
   return (
     <>

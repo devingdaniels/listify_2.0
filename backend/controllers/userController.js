@@ -47,9 +47,8 @@ const registerUser = asyncHandler(async (req, res) => {
 // @desc    Authenticate a new user
 // @route   POST /api/users/login
 // @access  public
-const loginUser = asyncHandler(async (req, res) => {
+const loginUser = asyncHandler(async (req, res) => {    
     const { email, password } = req.body
-
     // Check if user exists
     const user = await User.findOne({ email })
         
@@ -70,15 +69,8 @@ const loginUser = asyncHandler(async (req, res) => {
 // @desc    Get a user's data
 // @route   GET /api/users/me
 // @access  Public
-const getMe = asyncHandler(async (req, res) => { 
-        
-    const { _id, fname, lname, email } = await User.findById(req.user.id)
-    
-    res.status(200).json({
-        id: _id,
-        name: fname + ' ' + lname,
-        email: email
-    })
+const getMe = asyncHandler(async (req, res) => {
+    res.status(200).json( req.user )
 })
 
 

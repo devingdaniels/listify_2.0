@@ -24,7 +24,8 @@ function App() {
     <>
       <Header />
       <Routes>
-        <Route path='/' element={<LoginPage/>}/>
+        <Route path='/' element={<p>Hello from home page</p>}/>
+        <Route path='/login' element={<LoginPage/>}/>
         <Route path='/register' element={<Register/>}/>
         <Route path='/dashboard' element={<DashBoard/>}/>
       </Routes>

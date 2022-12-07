@@ -26,19 +26,9 @@ const Header = (props) => {
     navigate('/')
   }
 
-  const determinePage = () => { 
-     if (location.pathname === '/dashboard') {   
-      navigate('/')
-      return
-    }
-
-    if (location.pathname === '/register') {
-      navigate('/')
-    }
-    else if (location.pathname === '/') {
-      navigate('/register')
-    } 
-  }
+  const goToLogin = () => { navigate('./login') }
+  const goToRegister = () => { navigate('/register') }
+  
 
   if (user) { 
     return (
@@ -60,6 +50,34 @@ const Header = (props) => {
     )    
   }
 
+
+  if (location.pathname === '/') {    
+    return (
+      <header>
+        <div>
+          <BsCheck2Circle size={40} />
+          <h1>ListiFy</h1>
+        </div>
+        <ul>
+          <li>
+            <button onClick={ goToLogin }>
+              <div className='navTab'>
+                <VscAccount /> <span>Login</span>
+              </div>
+            </button>
+          </li>
+          <li>
+        <button onClick={goToRegister}>
+          <div className='navTab'>
+            <VscAccount /> <span>Register</span>
+          </div>
+        </button>
+      </li>
+        </ul>
+      </header>
+    )
+  }
+
   if (location.pathname === '/register') {    
     return (
       <header>
@@ -69,7 +87,7 @@ const Header = (props) => {
         </div>
         <ul>
           <li>
-            <button onClick={determinePage}>
+            <button onClick={goToLogin}>
               <div className='navTab'>
                 <VscAccount /> <span>Login</span>
               </div>
@@ -87,7 +105,7 @@ const Header = (props) => {
       </div>
       <ul>
         <li>
-        <button onClick={determinePage}>
+        <button onClick={goToRegister}>
           <div className='navTab'>
             <VscAccount /> <span>Register</span>
           </div>

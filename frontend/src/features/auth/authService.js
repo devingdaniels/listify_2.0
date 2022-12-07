@@ -1,7 +1,7 @@
 // This file is for making HTTP requests and sending back, and setting data in local storage 
 import axios from 'axios'
 
-const API_URL = '/api/users'
+const API_URL = '/api/users/'
 
 // Register user
 const register = async (userData) => { 
@@ -24,6 +24,7 @@ const login = async (userData) => {
         // Set local storage with user data 
         localStorage.setItem('user', JSON.stringify(response.data))                
     }
+    
     return response.data
 }
 
