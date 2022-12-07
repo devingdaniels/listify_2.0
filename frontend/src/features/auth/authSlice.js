@@ -14,6 +14,18 @@ const initialState = {
     message: ''    
 }
 
+
+// Login user
+export const login = createAsyncThunk('auth/', async (user, thunkAPI) => { 
+    try {
+        return await authService.login(user)
+    } catch (error) {
+        const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+        // Reject and send error message as the payload
+        return thunkAPI.rejectWithValue(message)
+    }
+})
+
 // Register user
 export const register = createAsyncThunk('auth/register', async (user, thunkAPI) => { 
     try {
@@ -24,6 +36,14 @@ export const register = createAsyncThunk('auth/register', async (user, thunkAPI)
         return thunkAPI.rejectWithValue(message)
     }
 })
+
+// Logout 
+export const logout = createAsyncThunk('auth/logout', async () => { 
+    await authService.logout()
+})
+
+
+
 
 // Reducers are not async (not Thunk Functions)
 export const authSlice = createSlice({
@@ -40,6 +60,8 @@ export const authSlice = createSlice({
     // Handle pending and fulfilled state during registration since it is async funk function
     extraReducers: (builder) => { 
         builder
+
+        // Register Cases
             .addCase(register.pending, (state) => {
                 state.isLoading = true
             })
@@ -56,6 +78,28 @@ export const authSlice = createSlice({
                 // Something went wrong during registration
                 state.user = null
             })
+            // Logout Cases
+            .addCase(logout.fulfilled, (state) => { 
+                state.user = null
+            })
+        // Login Cases
+            .addCase(login.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(login.fulfilled, (state, action) => { 
+                state.isLoading = false
+                state.isSuccess = true
+                state.user = action.payload
+            })
+            .addCase(login.rejected, (state, action) => { 
+                state.isLoading = false
+                state.isError = true
+                // action.payload comes from register function, thunkAPI.rejectWithValue in register function
+                state.message = action.payload
+                // Something went wrong during registration
+                state.user = null
+            })
+        
     }
 })
 

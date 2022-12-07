@@ -16,8 +16,7 @@ const getProjects = asyncHandler(async (req, res) => {
 // @desc    Create a project
 // @route   POST /api/projects
 // @access  Private
-const createProject = asyncHandler(async (req, res) => {
-    console.log(req.body.title)
+const createProject = asyncHandler(async (req, res) => {    
     if (!req.body.title) {
         res.status(400)
         throw new Error('Project needs a title')

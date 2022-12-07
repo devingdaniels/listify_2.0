@@ -1,9 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { CiLogin } from 'react-icons/ci'
-
-import Header from '../components/Header'
 
 
 import { useSelector, useDispatch } from 'react-redux'
@@ -11,6 +8,9 @@ import { toast } from 'react-toastify'
 
 // Auth
 import {register, reset } from '../features/auth/authSlice'
+
+// Spinner
+import Spinner from '../components/Spinner'
 
 const Register = () => {  
   // State variables 
@@ -27,8 +27,8 @@ const Register = () => {
   //
   const navigate = useNavigate()
 
-  // const disbatch = useDispatch()
-  // const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth)
+  const dispatch = useDispatch()
+  const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth)
 
 
   const onChange = (e) => { 
@@ -38,16 +38,50 @@ const Register = () => {
     }))
   }
 
-  const onSubmit = () => { 
+  const onSubmit = (e) => { 
+    // Prevent page reload
+    e.preventDefault()
+    // Ensure passwords match
+    if (password !== password2) {
+      toast.error('Passwords do not match')
+    }
+    // Register user
+    else { 
+      const userData = {
+        fname,
+        lname,
+        email,
+        password
+      }
+      // Dispatch 
+    dispatch(register(userData))
+    }
+  }
 
+  useEffect(() => {
+    // First check for errors
+    if (isError) { 
+      toast.error(message)
+    }
+
+    if (isSuccess || user) { 
+      navigate('/dashboard')
+    }
+
+    // Reset the state
+    dispatch(reset())
+
+  }, [user, isError, isSuccess, message, navigate, dispatch])
+
+
+  if (isLoading) { 
+    return <Spinner/>
   }
 
   return (
-    <>
-      <Header icon={<CiLogin />} text={'Login'} navigate={'/'} />      
-      <div className='getUserDetailsForm'>
+    <>      
       <h2>Register</h2>        
-      <form onSubmit={onSubmit}>          
+      <form className='getUserDetailsForm' onSubmit={onSubmit}>          
         <label htmlFor="fname">First Name</label>
         <input
           type="text"
@@ -95,47 +129,8 @@ const Register = () => {
           />        
         <button type='submit'>Create Account</button>
         </form>      
-      </div>
     </>
   )
 }
 
 export default Register
-
-
-
-
-
-  // // Component methods
-  // const handleLogin = async(e) => { 
-  //   // Prevent page refresh 
-  //   e.preventDefault()
-  //   // Validate the user login... 
-  //   const response = await fetch('api/register_user', {
-  //       method: 'POST',
-  //       headers: { 'Content-Type': 'application/json' },
-  //       body: JSON.stringify({
-  //         fName,
-  //         lName,
-  //         email,
-  //         password
-  //       })
-  //     })
-  //   // Resolve promise
-  //     const data = await response.json()
-  //   // Determine registration status
-  //   if (data.status === 'User added successfully') {
-  //     console.log(data)
-  //     // Navigate back to login
-  //     navigate('/')                
-  //   }
-  //   else if (data.status === 'User already exists.') {
-  //     console.log(data)
-  //     // Indicate to user that email is already in existance
-
-  //   }
-  //   else { 
-  //     console.log(data)
-  //     // alert user there was a server error. Advise please try again 
-  //   }
-  // }

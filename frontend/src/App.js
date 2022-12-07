@@ -19,11 +19,10 @@ import LoginPage from './pages/Login'
 import Register from './pages/Register';
 import DashBoard from './pages/DashBoard'
 
-
-
 function App() {
   return (
     <>
+      <Header />
       <Routes>
         <Route path='/' element={<LoginPage/>}/>
         <Route path='/register' element={<Register/>}/>

@@ -1,12 +1,6 @@
 // Dependencies
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-// Components
-import Header from '../components/Header'
-// Icons
-import { BsPersonCircle} from 'react-icons/bs'
-
-
 
 const Login = () => {  
   // State variables 
@@ -28,12 +22,12 @@ const Login = () => {
 
   }
 
+  
+
   return (
     <>
-      <Header icon={<BsPersonCircle />} text={'Register'} navigate={'/register'}/>      
-      <div className='getUserDetailsForm'>
       <h2>Login</h2>        
-      <form onSubmit={onSubmit}>          
+      <form className='getUserDetailsForm'onSubmit={onSubmit}>          
         <label htmlFor="email">Email</label>
         <input
           type="email"
@@ -54,7 +48,6 @@ const Login = () => {
           />              
         <button type='submit'>Login</button>
         </form>      
-      </div>
     </>
   )
 }

@@ -25,6 +25,11 @@ header div {
   align-items: center;
 }
 
+.navTab {
+  display: flex;
+  align-items: center;
+}
+
 nav {
   display: flex;
   flex-direction: column;
@@ -42,8 +47,12 @@ label {
   display: block;
 }
 
+li {
+  list-style: none;
+}
+
 button {
-  display: block;
+  /* display: block; */
 }
 
 form {
@@ -51,7 +60,6 @@ form {
 
 input,
 label {
-  margin: 1%;
 }
 
 .headerNavContainer {
@@ -67,11 +75,7 @@ label {
 
 /* LOGIN PAGE */
 
-.getUserDetailsForm {
-  display: flex;
-  flex-direction: column;
-  max-width: 35vw;
-  margin: 0 auto;
-  padding: 1%;
-  max-width: 25vw;
+form {
+  margin: auto;
+  width: 30vw;
 }
