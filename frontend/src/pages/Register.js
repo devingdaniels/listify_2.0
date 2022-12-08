@@ -11,6 +11,7 @@ import {register, reset } from '../features/auth/authSlice'
 
 // Spinner
 import Spinner from '../components/Spinner'
+import { VscAccount } from 'react-icons/vsc'
 
 const Register = () => {  
   // State variables 
@@ -79,10 +80,13 @@ const Register = () => {
   }
 
   return (
-    <>      
-      <h2>Register</h2>        
-      <form className='getUserDetailsForm' onSubmit={onSubmit}>          
-        <label htmlFor="fname">First Name</label>
+    <>
+      <section className='form-section'>
+        <div>
+          <VscAccount />
+          <h2>Register</h2>
+        </div>              
+      <form className='getUserDetailsForm' onSubmit={onSubmit}>        
         <input
           type="text"
           name="fname"
@@ -90,8 +94,7 @@ const Register = () => {
           placeholder='Enter first name'
           required
           onChange={onChange}
-          />          
-        <label htmlFor="lname">Last Name</label>
+          />                  
           <input
             type="text"
             name="lname" 
@@ -99,8 +102,7 @@ const Register = () => {
             placeholder='Enter last name'
             required
             onChange={onChange}
-          /> 
-        <label htmlFor="email">Email Address</label>
+          />         
           <input
             type="email"
             name="email"
@@ -109,7 +111,6 @@ const Register = () => {
             required
             onChange={onChange}
           />        
-        <label htmlFor="password">Password</label>
           <input
             type="password"
             name='password'
@@ -117,8 +118,7 @@ const Register = () => {
             placeholder='Enter password'
             required
             onChange={onChange}
-          />
-        <label htmlFor="password2">Confirm Password</label>
+          />        
           <input
             type="password"
             name='password2'
@@ -128,7 +128,8 @@ const Register = () => {
             onChange={onChange}
           />        
         <button type='submit'>Create Account</button>
-        </form>      
+        </form>
+        </section>
     </>
   )
 }

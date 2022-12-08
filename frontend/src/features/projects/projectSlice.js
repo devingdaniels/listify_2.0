@@ -28,6 +28,20 @@ export const createProject = createAsyncThunk('project/create', async (project, 
   }
 })
 
+// Retrieve projects 
+export const getAllProjects = createAsyncThunk('projects/getAll', async (_, thunkAPI) => { 
+    try {
+        // GET in DB is protect, need token
+        const token = thunkAPI.getState().auth.user.token
+    return await projectService.getAllProjects(token)
+    } catch (error) {
+        const message =
+        (error.response && error.response.data && error.response.data.message) ||
+        error.message ||
+        error.toString()
+        return thunkAPI.rejectWithValue(message)        
+    }
+})
 
 export const projectSlice = createSlice({
     name: 'project',
@@ -46,6 +60,19 @@ export const projectSlice = createSlice({
                 state.projects.push(action.payload)
             })
             .addCase(createProject.rejected, (state, action) => { 
+                state.isLoading = false                
+                state.isError = true
+                state.message = action.payload
+            })
+            .addCase(getAllProjects.pending, (state) => { 
+            state.isLoading = true            
+            })
+            .addCase(getAllProjects.fulfilled, (state, action) => { 
+                state.isLoading = false            
+                state.isSuccess = true
+                state.projects = action.payload
+            })
+            .addCase(getAllProjects.rejected, (state, action) => { 
                 state.isLoading = false                
                 state.isError = true
                 state.message = action.payload

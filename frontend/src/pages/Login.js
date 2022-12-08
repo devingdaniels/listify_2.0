@@ -9,6 +9,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
 // Spinner
 import Spinner from '../components/Spinner'
+import { FiLogIn } from 'react-icons/fi'
 
 
 const Login = () => {  
@@ -66,19 +67,22 @@ const Login = () => {
 
   return (
     <>
-      <h2>Login</h2>        
-      <form className='getUserDetailsForm'onSubmit={onSubmit}>          
-        <label htmlFor="email">Email</label>
+      <section className='form-section'>
+        <div>
+          <FiLogIn/> 
+          <h2>Login</h2>          
+        </div>
+        <h5>Login and start ListiFy-ing</h5>
+      <form onSubmit={onSubmit}>  
         <input
           type="email"
           name="email"
-          value={ email}
+          value={ email }
           id="email"
           placeholder='Enter email'
           required
           onChange={onChange}
-          />          
-        <label htmlFor="password">Password</label>
+          />        
           <input
             type="password"
             name="password" 
@@ -88,7 +92,8 @@ const Login = () => {
             onChange={onChange}
           />              
         <button type='submit'>Login</button>
-        </form>      
+        </form>
+        </section>
     </>
   )
 }

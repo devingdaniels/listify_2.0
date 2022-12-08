@@ -8,7 +8,7 @@ import { logout, reset } from '../features/auth/authSlice'
 import { BsCheck2Circle } from 'react-icons/bs'
 import { VscAccount } from 'react-icons/vsc'
 import { BiLogOutCircle  } from 'react-icons/bi'
-
+import { FiLogIn } from 'react-icons/fi'
 const Header = (props) => {
 // Hooks
   const location = useLocation()
@@ -29,6 +29,10 @@ const Header = (props) => {
   const goToLogin = () => { navigate('./login') }
   const goToRegister = () => { navigate('/register') }
   
+
+  useEffect(() => { 
+
+  }, [navigate])
 
   if (user) { 
     return (
@@ -62,7 +66,7 @@ const Header = (props) => {
           <li>
             <button onClick={ goToLogin }>
               <div className='navTab'>
-                <VscAccount /> <span>Login</span>
+                <FiLogIn /> <span>Login</span>
               </div>
             </button>
           </li>
@@ -89,7 +93,7 @@ const Header = (props) => {
           <li>
             <button onClick={goToLogin}>
               <div className='navTab'>
-                <VscAccount /> <span>Login</span>
+                <FiLogIn /> <span>Login</span>
               </div>
             </button>
           </li>

@@ -26,11 +26,6 @@ header div {
   align-items: center;
 }
 
-.navTab {
-  display: flex;
-  align-items: center;
-}
-
 nav {
   display: flex;
   flex-direction: column;
@@ -48,6 +43,17 @@ li {
   list-style: none;
 }
 
+input {
+  display: block;
+}
+
+button {
+  background: none;
+  border: none;
+}
+
+/* HEADER CLASSES */
+
 .headerNavContainer {
   display: flex;
   justify-content: center;
@@ -55,11 +61,46 @@ li {
   cursor: pointer;
 }
 
+.navTab {
+  display: flex;
+  align-items: center;
+}
+
 .headerNavContainer span {
   margin-left: 3px;
 }
 
-/* LOGIN PAGE */
+/* FORMS */
+
+.form-section {
+  max-width: 40vw;
+  margin: auto;
+  padding: 1%;
+  text-align: center;
+}
+
+.form-section div {
+  display: flex;
+  align-items: center;
+  max-width: max-content;
+  margin: 0 auto 3% auto;
+  font-size: 2em;
+}
+
+.form-section h5 {
+  font-size: 2rem;
+}
+
+.form-section input {
+  width: 100%;
+  height: 1.8rem;
+  margin: 3% 0;
+}
+
+.form-section button {
+  width: 100%;
+  height: 1.8rem;
+}
 
 .loadingSpinner {
   max-width: max-content;
