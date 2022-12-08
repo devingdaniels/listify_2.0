@@ -79,19 +79,19 @@ const Login = () => {
           name="email"
           value={ email }
           id="email"
-          placeholder='Enter email'
+          placeholder='Email'
           required
           onChange={onChange}
-          />        
+          />
           <input
             type="password"
-            name="password" 
+            name="password"
             id="password"
-            placeholder='Enter password'
+            placeholder='Password'
             required
             onChange={onChange}
-          />              
-        <button type='submit'>Login</button>
+          />
+        <button className='loginRegister' type='submit'>Login</button>
         </form>
         </section>
     </>

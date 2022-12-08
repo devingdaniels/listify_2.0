@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 // Components
 import ProjectForm from '../components/ProjectForm'
+import Project from '../components/Project'
 import Spinner from '../components/Spinner'
 
 // Redux
@@ -47,9 +48,12 @@ function DashBoard() {
 
   return (
     <>
-      <section>
+      <section>        
         <h2>Welcome {user && user.name}</h2>
-        <ProjectForm/>
+        <ProjectForm />
+        {projects.map((project, index) => { 
+          return <Project key={index} project={ project} />
+        }) }        
     </section>
     
     </>

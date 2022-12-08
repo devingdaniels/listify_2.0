@@ -85,13 +85,14 @@ const Register = () => {
         <div>
           <VscAccount />
           <h2>Register</h2>
-        </div>              
+        </div>
+        <h5>Sign Up and start ListiFying</h5>
       <form className='getUserDetailsForm' onSubmit={onSubmit}>        
         <input
           type="text"
           name="fname"
           id="fname"
-          placeholder='Enter first name'
+          placeholder='First name'
           required
           onChange={onChange}
           />                  
@@ -99,7 +100,7 @@ const Register = () => {
             type="text"
             name="lname" 
             id="lname"
-            placeholder='Enter last name'
+            placeholder='Last name'
             required
             onChange={onChange}
           />         
@@ -107,7 +108,7 @@ const Register = () => {
             type="email"
             name="email"
             id="email"
-            placeholder='Enter email'
+            placeholder='Email'
             required
             onChange={onChange}
           />        
@@ -115,7 +116,7 @@ const Register = () => {
             type="password"
             name='password'
             id='password'
-            placeholder='Enter password'
+            placeholder='Password'
             required
             onChange={onChange}
           />        
@@ -123,11 +124,11 @@ const Register = () => {
             type="password"
             name='password2'
             id='password2'
-            placeholder='Confirm password'
+            placeholder='Confirm'
             required
             onChange={onChange}
           />        
-        <button type='submit'>Create Account</button>
+        <button className='loginRegister' type='submit'>Create Account</button>
         </form>
         </section>
     </>

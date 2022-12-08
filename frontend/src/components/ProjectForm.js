@@ -19,13 +19,13 @@ function ProjectForm() {
 
     return (
       <section>
-        <form onSubmit={handleSubmit}>
-            <label htmlFor="title">Title</label>
+        <form onSubmit={handleSubmit}>            
             <input
                 type="text"
                 name='title'
                 value={title}
                 id='title'
+                placeholder='New Project'
                 required
                 onChange={(e) => setTitle(e.target.value)}
                 />
