@@ -2,7 +2,8 @@ import { useState } from 'react'
 
 
 // Components
-import { GrFormAdd } from 'react-icons/gr'
+import { MdAddCircleOutline } from 'react-icons/md'
+
 
 function TaskForm() {
 
@@ -18,14 +19,14 @@ function TaskForm() {
     }
     
   return (
-      <form onClick={onClick }>
+      <form onClick={onClick} className='new-task-form'>
           <input
               type="text"
               placeholder='My New Task'
               value={title}
               onChange={ (e)=> setTitle(e.target.value) }            
           />
-          <button type='submit'><GrFormAdd /></button> 
+          <button type='submit'><MdAddCircleOutline size={ 40 } /></button> 
     </form>
   )
 }

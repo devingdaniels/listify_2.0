@@ -50,8 +50,18 @@ const updateProject = asyncHandler(async (req, res) => {
 // @desc    Delete a project
 // @route   DELETE /api/projects/api/projects/:id
 // @access  Private
-const deleteProject = asyncHandler(async(req, res) => { 
-    res.status(200).json({message: `Delete project ${req.params.id}`})
+const deleteProject = asyncHandler(async (req, res) => {
+    // Find project     
+    const project = Project.deleteOne({ id: req.params.id })
+            
+    if (project) {
+        res.status(200).json({ id: req.params.id, message: 'Project delete successful' })
+    } else { 
+        res.status(200).json({message: `Error deleting project ${req.params.id}`})
+    }
+    
+    console.log(req.params.id)
+    
 })
 
 

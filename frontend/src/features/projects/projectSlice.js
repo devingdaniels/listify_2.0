@@ -43,6 +43,23 @@ export const getAllProjects = createAsyncThunk('projects/getAll', async (_, thun
     }
 })
 
+
+// Retrieve projects 
+export const deleteProject = createAsyncThunk('projects/deleteOne', async (id, thunkAPI) => { 
+    try {
+        // DELETE project route in DB is protected, need token
+        const token = thunkAPI.getState().auth.user.token
+    return await projectService.deleteProject(id, token)
+    } catch (error) {
+        const message =
+        (error.response && error.response.data && error.response.data.message) ||
+        error.message ||
+        error.toString()
+        return thunkAPI.rejectWithValue(message)        
+    }
+})
+
+
 export const projectSlice = createSlice({
     name: 'project',
     initialState: initialState,
@@ -76,6 +93,23 @@ export const projectSlice = createSlice({
                 state.isLoading = false                
                 state.isError = true
                 state.message = action.payload
+            })
+            .addCase(deleteProject.pending, (state) => { 
+            state.isLoading = true            
+            })
+            .addCase(deleteProject.fulfilled, (state, action) => { 
+                state.isLoading = false            
+                state.isSuccess = true
+                // Getting an ID of deleted project from backend API
+                // Filter out deleted goal from state so UI updates correctly 
+                state.projects = state.projects.filter((project) => project._id !== action.payload.id)
+                console.log(action.payload)
+                state.message = action.payload.message
+            })
+            .addCase(deleteProject.rejected, (state, action) => { 
+                state.isLoading = false
+                state.isError = true
+                state.message = action.payload.message
             })
     }
 })

@@ -11,6 +11,8 @@ import Spinner from '../components/Spinner'
 // Redux
 import { getAllProjects, reset} from '../features/projects/projectSlice';
 
+// Toastify
+import { toast } from 'react-toastify'
 
 function DashBoard() {
   const navigate = useNavigate()
@@ -18,7 +20,7 @@ function DashBoard() {
   
   // Save the current logged in user
   const { user } = useSelector((state)=> state.auth)
-  const { projects, isLoading, isError, message } = useSelector((state) => state.projects)
+  const { projects, isLoading, isSuccess, isError, message } = useSelector((state) => state.projects)
 
   useEffect(() => {
 
@@ -30,7 +32,10 @@ function DashBoard() {
       navigate('/')
     }
 
-    console.log('DashBoard render')
+    if (isSuccess) {
+            toast.success(message)
+        }
+
     // Dispatch and fetch all projects from DB, will go into projects variable
     dispatch(getAllProjects())
 
@@ -41,18 +46,16 @@ function DashBoard() {
   },[user, navigate, isError, message, dispatch])
 
 
-
   if (isLoading) { 
     return <Spinner/>
   }
 
   return (
     <>
-      <section>        
+      <section className='dashboardContainer'>        
         <h2>Welcome {user && user.name}</h2>
         <ProjectForm />        
-        {projects.map((project) => { 
-          console.log(project)
+        {projects.map((project) => {           
           return <Project key={project._id} project={ project} />
         }) }        
     </section>

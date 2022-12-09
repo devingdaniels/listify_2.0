@@ -29,7 +29,13 @@ function App() {
         <Route path='/register' element={<Register/>}/>
         <Route path='/dashboard' element={<DashBoard/>}/>
       </Routes>
-      <ToastContainer/>
+      <ToastContainer
+        position='top-right'
+        autoClose={5000}
+        closeOnClick
+        draggable
+        pauseOnHover
+      />
       {/* <Footer /> */}
     </>
   );
