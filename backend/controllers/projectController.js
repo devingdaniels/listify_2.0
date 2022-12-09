@@ -23,6 +23,7 @@ const createProject = asyncHandler(async (req, res) => {
     }      
     // Create a new project linked to current user
     const project = await Project.create({
+        // User id is not needed, is coming from req set in middlware
         user: req.user.id,
         title: req.body.title,
         tasks: []
@@ -34,7 +35,7 @@ const createProject = asyncHandler(async (req, res) => {
     }
 
     console.log(project)
-    res.status(200).json({project})
+    res.status(200).json(project)
 })
 
 

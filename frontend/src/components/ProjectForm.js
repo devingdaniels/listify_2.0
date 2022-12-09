@@ -1,5 +1,4 @@
 import { useState }  from 'react'
-
 // Redux
 import { useDispatch } from 'react-redux'
 import { createProject }  from '../features/projects/projectSlice'
@@ -8,14 +7,13 @@ function ProjectForm() {
     // Hooks
     const dispatch = useDispatch()
     const [title, setTitle] = useState('')
+  
 
     const handleSubmit = (e) => { 
-        e.preventDefault()
-
-        dispatch(createProject({ title }))
-        setTitle('')
+      e.preventDefault()
+      dispatch(createProject({ title }))      
+      setTitle('')      
     }
-
 
     return (
       <section>

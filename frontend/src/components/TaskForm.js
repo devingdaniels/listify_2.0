@@ -13,7 +13,7 @@ function TaskForm() {
     const onClick = (e) => { 
         e.preventDefault()
 
-
+        setTitle('')
         console.log(title)
     }
     

@@ -7,12 +7,12 @@ const API_URL = 'api/projects/'
 const createProject = async (project, token) => { 
     const config = {
         headers: {
-            authorization: `Bearer ${token}`
+            Authorization: `Bearer ${token}`
         }
     }
     // Send request with project data and bearer token
     const response = await axios.post(API_URL, project, config)
-
+    
     return response.data
 }
 
@@ -21,7 +21,7 @@ const createProject = async (project, token) => {
 const getAllProjects = async (token) => { 
     const config = {
         headers: {
-            authorization: `Bearer ${token}`
+            Authorization: `Bearer ${token}`
         }
     }
     // Send request with project data and bearer token

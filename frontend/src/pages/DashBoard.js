@@ -30,6 +30,7 @@ function DashBoard() {
       navigate('/')
     }
 
+    console.log('DashBoard render')
     // Dispatch and fetch all projects from DB, will go into projects variable
     dispatch(getAllProjects())
 
@@ -37,7 +38,6 @@ function DashBoard() {
     return () => { 
       dispatch(reset())
     }
-    
   },[user, navigate, isError, message, dispatch])
 
 
@@ -50,9 +50,10 @@ function DashBoard() {
     <>
       <section>        
         <h2>Welcome {user && user.name}</h2>
-        <ProjectForm />
-        {projects.map((project, index) => { 
-          return <Project key={index} project={ project} />
+        <ProjectForm />        
+        {projects.map((project) => { 
+          console.log(project)
+          return <Project key={project._id} project={ project} />
         }) }        
     </section>
     

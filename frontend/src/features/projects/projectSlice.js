@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
 import projectService from './projectService'
 
-// Create initial global project state
+// Global state for storing projects and status of operations
 const initialState = {    
     projects: [],
     isError: false,
