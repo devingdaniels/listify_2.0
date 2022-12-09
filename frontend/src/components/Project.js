@@ -1,19 +1,13 @@
 // Components
 import Task from '../components/Task'
 import TaskForm from '../components/TaskForm'
-
 // Icons
 import {AiFillDelete } from 'react-icons/ai'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { deleteProject } from '../features/projects/projectSlice'
-
-
-
 
 function Project({ project }) {
     const dispatch = useDispatch()
-
-    
 
     const handleDeleteProject = () => {
         // Pass ID of project --> slice --> backend        

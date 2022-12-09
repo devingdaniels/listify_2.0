@@ -51,19 +51,23 @@ const updateProject = asyncHandler(async (req, res) => {
 // @route   DELETE /api/projects/api/projects/:id
 // @access  Private
 const deleteProject = asyncHandler(async (req, res) => {
-    // Find project     
-    const project = Project.deleteOne({ id: req.params.id })
-            
-    if (project) {
-        res.status(200).json({ id: req.params.id, message: 'Project delete successful' })
-    } else { 
-        res.status(200).json({message: `Error deleting project ${req.params.id}`})
-    }
-    
-    console.log(req.params.id)
-    
-})
+    // Find project
+    const id = req.params.id
+    const project = Project.findById(id)
 
+    try {
+        const response = await Project.deleteOne({id})
+        res.status(200).json({message: 'Project deleted' })
+    } catch (error) {
+        console.log(error)
+        res.status(400)
+        // This message is what gets returned in action.payload in projectSlice
+        throw new Error('Project delete failed')
+    }
+
+
+ 
+})
 
 module.exports = {
     getProjects,
@@ -71,3 +75,29 @@ module.exports = {
     updateProject,
     deleteProject
 }
+
+
+//     if (!project) { 
+//         res.status(400).json({ id: id, message: 'Project not found.' })
+//         throw new Error('Project not found.')
+//     }
+    
+//     // Check for a user, who's ID is in req, set by authMiddleware
+//     if (!req.user) { 
+//         res.status(400).json({ id: id, message: 'No user found.' })
+//         throw new Error('No user found.')
+//     }
+
+//     // Ensure user matches logged in user    
+//     if (project.user.toString() !== req.user.id) {
+//         res.status(400).json({ id: id, message: 'User not authorized.' })
+//         throw new Error('User not authorized.')
+//     }
+
+//     // Remove project from DB
+//     if (await project.deleteOne(id)) {
+//        return res.status(200).json({ id: id, message: 'Successfully deleted project' })
+//     } else { 
+//         return res.status(400).json({ id: id, message: 'Error deleting project' })
+//     }
+// })

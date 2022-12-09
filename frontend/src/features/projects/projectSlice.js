@@ -79,6 +79,7 @@ export const projectSlice = createSlice({
             .addCase(createProject.rejected, (state, action) => { 
                 state.isLoading = false                
                 state.isError = true
+                state.isSuccess = false
                 state.message = action.payload
             })
             .addCase(getAllProjects.pending, (state) => { 
@@ -100,16 +101,17 @@ export const projectSlice = createSlice({
             .addCase(deleteProject.fulfilled, (state, action) => { 
                 state.isLoading = false            
                 state.isSuccess = true
+                state.isError = false
                 // Getting an ID of deleted project from backend API
                 // Filter out deleted goal from state so UI updates correctly 
                 state.projects = state.projects.filter((project) => project._id !== action.payload.id)
-                console.log(action.payload)
                 state.message = action.payload.message
             })
             .addCase(deleteProject.rejected, (state, action) => { 
                 state.isLoading = false
+                state.isSuccess = false
                 state.isError = true
-                state.message = action.payload.message
+                state.message = action.payload
             })
     }
 })

@@ -24,8 +24,8 @@ function DashBoard() {
 
   useEffect(() => {
 
-    if (isError) { 
-      console.log(message)
+    if (isError) {       
+      toast.error(message)
     }
 
     if (!user) { 
@@ -33,8 +33,8 @@ function DashBoard() {
     }
 
     if (isSuccess) {
-            toast.success(message)
-        }
+      toast.success(message)
+    }
 
     // Dispatch and fetch all projects from DB, will go into projects variable
     dispatch(getAllProjects())
@@ -44,6 +44,8 @@ function DashBoard() {
       dispatch(reset())
     }
   },[user, navigate, isError, message, dispatch])
+
+
 
 
   if (isLoading) { 
