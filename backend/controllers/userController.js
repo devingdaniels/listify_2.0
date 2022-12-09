@@ -53,11 +53,13 @@ const loginUser = asyncHandler(async (req, res) => {
     const user = await User.findOne({ email })
         
     if (user && await bcrypt.compare(password, user.password,)) {
+        res.status(200)
         res.json({
             _id: user._id,
             name: user.fname + '' + user.lname,
             email: user.email,
-            token: generateToken(user._id)
+            token: generateToken(user._id),
+            message: 'Login successful!'
         })
     } else { 
         res.status(400)

@@ -22,18 +22,14 @@ function DashBoard() {
   const { user } = useSelector((state)=> state.auth)
   const { projects, isLoading, isSuccess, isError, message } = useSelector((state) => state.projects)
 
-  useEffect(() => {
+  useEffect(() => {    
 
     if (isError) {       
       toast.error(message)
     }
 
-    if (!user) { 
+    if (!user) {
       navigate('/')
-    }
-
-    if (isSuccess) {
-      toast.success(message)
     }
 
     // Dispatch and fetch all projects from DB, will go into projects variable
@@ -44,7 +40,6 @@ function DashBoard() {
       dispatch(reset())
     }
   },[user, navigate, isError, message, dispatch])
-
 
 
 

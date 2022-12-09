@@ -34,7 +34,7 @@ const createProject = asyncHandler(async (req, res) => {
         throw new Error('Error creating new project')
     }
 
-    console.log(project)
+    // Send back new project to front end
     res.status(200).json(project)
 })
 
@@ -75,29 +75,3 @@ module.exports = {
     updateProject,
     deleteProject
 }
-
-
-//     if (!project) { 
-//         res.status(400).json({ id: id, message: 'Project not found.' })
-//         throw new Error('Project not found.')
-//     }
-    
-//     // Check for a user, who's ID is in req, set by authMiddleware
-//     if (!req.user) { 
-//         res.status(400).json({ id: id, message: 'No user found.' })
-//         throw new Error('No user found.')
-//     }
-
-//     // Ensure user matches logged in user    
-//     if (project.user.toString() !== req.user.id) {
-//         res.status(400).json({ id: id, message: 'User not authorized.' })
-//         throw new Error('User not authorized.')
-//     }
-
-//     // Remove project from DB
-//     if (await project.deleteOne(id)) {
-//        return res.status(200).json({ id: id, message: 'Successfully deleted project' })
-//     } else { 
-//         return res.status(400).json({ id: id, message: 'Error deleting project' })
-//     }
-// })

@@ -5,13 +5,13 @@ import { useState } from 'react'
 import { MdAddCircleOutline } from 'react-icons/md'
 
 
-function TaskForm() {
-
+function TaskForm() { 
     const [title, setTitle] = useState('')
 
 
 
-    const onClick = (e) => { 
+    
+    const onSubmit = (e) => { 
         e.preventDefault()
 
         setTitle('')
@@ -19,14 +19,14 @@ function TaskForm() {
     }
     
   return (
-      <form onClick={onClick} className='new-task-form'>
+      <form onSubmit={onSubmit} className='task-form'>
           <input
               type="text"
               placeholder='My New Task'
               value={title}
               onChange={ (e)=> setTitle(e.target.value) }            
           />
-          <button type='submit'><MdAddCircleOutline size={ 40 } /></button> 
+          <button type='submit'><MdAddCircleOutline size={ 20 } /></button> 
     </form>
   )
 }

@@ -40,10 +40,14 @@ const Login = () => {
       toast.error(message)
     }
 
-    if (isSuccess || user) { 
-      navigate('/dashboard')
+    if (isSuccess) { 
+      toast.success(message)
     }
 
+    if (isSuccess || user) {      
+      navigate('/dashboard')
+    }
+    
     // Reset the state
     dispatch(reset())
 
