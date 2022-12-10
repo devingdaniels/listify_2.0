@@ -1,21 +1,34 @@
+// React
 import { useState } from 'react'
+
+// Redux
+import { useDispatch } from 'react-redux'
+import { updateProject } from '../features/projects/projectSlice'
+
 
 
 // Components
 import { MdAddCircleOutline } from 'react-icons/md'
 
 
-function TaskForm() { 
-    const [title, setTitle] = useState('')
+function TaskForm({ id }) { 
+    const dispatch = useDispatch()
 
+    const [task, setTask] = useState('')    
 
-
-    
     const onSubmit = (e) => { 
         e.preventDefault()
 
-        setTitle('')
-        console.log(title)
+
+        const data = {
+            title: task,
+            id: id
+        }
+        dispatch(updateProject(data))
+
+
+
+        setTask('')        
     }
     
   return (
@@ -23,8 +36,8 @@ function TaskForm() {
           <input
               type="text"
               placeholder='My New Task'
-              value={title}
-              onChange={ (e)=> setTitle(e.target.value) }            
+              value={task}
+              onChange={ (e)=> setTask(e.target.value) }            
           />
           <button type='submit'><MdAddCircleOutline size={ 20 } /></button> 
     </form>

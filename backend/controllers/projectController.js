@@ -42,8 +42,28 @@ const createProject = asyncHandler(async (req, res) => {
 // @desc    Update project
 // @route   PUT /api/projects/:id
 // @access  Private
-const updateProject = asyncHandler(async (req, res) => { 
-    res.status(200).json({message: `Update project ${req.params.id}`})
+const updateProject = asyncHandler(async (req, res) => {
+    const { id, title } = req.body
+    // Ensure project exists
+    const project = await Project.findById(id)    
+
+    if (!req.user) { 
+        console.log('Invalid user')
+        throw new Error('No user found.')
+    }
+
+    if (project) {
+        console.log(project)
+        project.tasks.push(title)
+        console.log(project)
+        await project.save()
+        console.log('Project was found in put request.')
+        res.status(200).json(project)
+    } else { 
+        res.status(400)
+        throw new Error('Project not found')
+    }
+    
 })
 
 

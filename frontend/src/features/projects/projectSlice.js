@@ -60,6 +60,23 @@ export const deleteProject = createAsyncThunk('projects/deleteOne', async (id, t
 })
 
 
+// Update project 
+export const updateProject = createAsyncThunk('projects/updateOne', async (data, thunkAPI) => { 
+    // data = {id, taskTitle}
+    try {
+        // PUT project route in DB is protected, need token
+        const token = thunkAPI.getState().auth.user.token
+    return await projectService.updateProject(data, token)
+    } catch (error) {
+        const message =
+        (error.response && error.response.data && error.response.data.message) ||
+        error.message ||
+        error.toString()
+        return thunkAPI.rejectWithValue(message)  
+    }
+})
+
+
 export const projectSlice = createSlice({
     name: 'project',
     initialState: initialState,
@@ -108,6 +125,30 @@ export const projectSlice = createSlice({
                 state.message = action.payload.message
             })
             .addCase(deleteProject.rejected, (state, action) => { 
+                state.isLoading = false
+                state.isSuccess = false
+                state.isError = true
+                state.message = action.payload
+            })
+            .addCase(updateProject.pending, (state) => { 
+            state.isLoading = true            
+            })
+            .addCase(updateProject.fulfilled, (state, action) => { 
+                state.isLoading = false            
+                state.isSuccess = true
+                state.isError = false
+                // Getting an ID of deleted project from backend API                
+                state.projects = state.projects.filter((project) => {
+                    // Return all project except modified --> replace                    
+                    if (project._id !== action.payload.id) { 
+                        return project
+                    } else {
+                        return action.payload
+                    }
+                })
+                state.message = action.payload.message
+            })
+            .addCase(updateProject.rejected, (state, action) => { 
                 state.isLoading = false
                 state.isSuccess = false
                 state.isError = true

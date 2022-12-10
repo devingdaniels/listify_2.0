@@ -44,11 +44,24 @@ const deleteProject = async (id, token) => {
     return response.data
 }
 
+// Create project
+const updateProject = async (data, token) => {    
+    const config = {
+        headers: {
+            authorization: `Bearer ${token}`
+        },        
+    }    
+    // Send request with project data and bearer token
+    const response = await axios.put(API_URL + data.id, data, config)
+
+    return response.data
+}
 
 const projectService = {
     createProject,
     getAllProjects,
-    deleteProject
+    deleteProject,
+    updateProject
 } 
  
 export default projectService

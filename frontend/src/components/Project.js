@@ -20,7 +20,7 @@ function Project({ project }) {
         <h2>{project.title}</h2>
         <button onClick={handleDeleteProject}><AiFillDelete size={25} /></button>
       </div>
-      <TaskForm />
+      <TaskForm id={ project._id } />
       {project.tasks.map((task, index) => { 
           return <Task key={index} task={ task } />
       })}
