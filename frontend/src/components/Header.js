@@ -38,7 +38,7 @@ const Header = (props) => {
     return (
       <header>     
       <div>
-        <BsCheck2Circle size={ 40 }/>
+        <BsCheck2Circle className='react-icon'/>
         <h1>ListiFy</h1>
       </div>
       <ul>
@@ -59,21 +59,21 @@ const Header = (props) => {
     return (
       <header>
         <div>
-          <BsCheck2Circle size={40} />
+          <BsCheck2Circle className='react-icon' />
           <h1>ListiFy</h1>
         </div>
         <ul>
           <li>
             <button onClick={ goToLogin }>
               <div className='navTab'>
-                <FiLogIn /> <span>Login</span>
+                <FiLogIn className='react-icon'/><span>Login</span>
               </div>
             </button>
           </li>
           <li>
         <button onClick={goToRegister}>
           <div className='navTab'>
-            <VscAccount /> <span>Register</span>
+            <VscAccount className='react-icon'/> <span>Register</span>
           </div>
         </button>
       </li>
@@ -86,14 +86,14 @@ const Header = (props) => {
     return (
       <header>
         <div>
-          <BsCheck2Circle size={40} />
+          <BsCheck2Circle className='react-icon' />
           <h1>ListiFy</h1>
         </div>
         <ul>
           <li>
             <button onClick={goToLogin}>
               <div className='navTab'>
-                <FiLogIn /> <span>Login</span>
+                <FiLogIn className='react-icon' /> <span>Login</span>
               </div>
             </button>
           </li>
@@ -104,14 +104,14 @@ const Header = (props) => {
     return (      
       <header>     
       <div>
-        <BsCheck2Circle size={ 40 }/>
+        <BsCheck2Circle className='react-icon'/>
         <h1>ListiFy</h1>
       </div>
       <ul>
         <li>
         <button onClick={goToRegister}>
           <div className='navTab'>
-            <VscAccount /> <span>Register</span>
+            <VscAccount className='react-icon'/> <span>Register</span>
           </div>
         </button>
       </li>

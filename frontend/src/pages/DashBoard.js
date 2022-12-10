@@ -50,7 +50,7 @@ function DashBoard() {
   return (
     <>
       <section className='dashboardContainer'>        
-        <h2>Welcome {user && user.name}</h2>
+        <h2>Welcome, {user && user.name.split(' ')[0]}!</h2>
         <ProjectForm />        
         {projects.map((project) => {           
           return <Project key={project._id} project={ project} />

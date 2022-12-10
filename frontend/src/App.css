@@ -30,10 +30,6 @@ nav {
   flex-direction: column;
 }
 
-h1 {
-  font-size: 3.5rem;
-}
-
 a {
   text-decoration: none;
 }
@@ -55,14 +51,44 @@ button {
   align-items: center;
   cursor: pointer;
 }
-
+/* 
 .navTab {
   display: flex;
   align-items: center;
+  font-size: 1.5rem;
+  cursor: pointer;
+} */
+
+.navTab:hover {
+  transform: translateY(-3px);
 }
 
 .headerNavContainer span {
   margin-left: 3px;
+}
+
+header .react-icon {
+  font-size: 1.5rem;
+}
+
+header ul {
+  display: flex;
+}
+
+header li {
+  margin-left: 10px;
+}
+
+/* LANDING PAGE */
+.landing-page {
+  border: 1px solid rgb(218, 197, 197);
+  width: 70%;
+  margin: auto;
+  padding: 1%;
+}
+
+.landing-page-article {
+  text-align: center;
 }
 
 /* FORMS */

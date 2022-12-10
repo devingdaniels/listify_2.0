@@ -15,6 +15,7 @@ import Footer from './components/Footer'
 
 
 // Pages
+import Landing from './pages/Landing'
 import LoginPage from './pages/Login'
 import Register from './pages/Register';
 import DashBoard from './pages/DashBoard'
@@ -24,7 +25,7 @@ function App() {
     <>
       <Header />
       <Routes>
-        <Route path='/' element={<p>Hello from home page</p>}/>
+        <Route path='/' element={<Landing />}/>
         <Route path='/login' element={<LoginPage/>}/>
         <Route path='/register' element={<Register/>}/>
         <Route path='/dashboard' element={<DashBoard/>}/>

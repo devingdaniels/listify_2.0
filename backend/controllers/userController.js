@@ -56,7 +56,7 @@ const loginUser = asyncHandler(async (req, res) => {
         res.status(200)
         res.json({
             _id: user._id,
-            name: user.fname + '' + user.lname,
+            name: `${user.fname} ${user.lname}`,
             email: user.email,
             token: generateToken(user._id),
             message: 'Login successful!'
