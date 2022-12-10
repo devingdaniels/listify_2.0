@@ -11,7 +11,6 @@ body {
   background-color: rgb(12, 15, 24);
   font: 1rem;
   font-family: "Fira Sans", sans-serif;
-  height: 100vh;
 }
 
 header {
@@ -120,6 +119,14 @@ button {
   max-width: 40vw;
   padding: 1%;
   margin: 1% auto;
+}
+
+.project-container li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2% 0;
+  padding: 1%;
 }
 
 .project-card-header {

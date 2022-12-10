@@ -44,6 +44,12 @@ const createProject = asyncHandler(async (req, res) => {
 // @access  Private
 const updateProject = asyncHandler(async (req, res) => {
     const { id, title } = req.body
+
+    if (title === '') { 
+        res.status(400)
+        throw new Error('Task needs a title')
+    }
+
     // Ensure project exists
     const project = await Project.findById(id)    
 
@@ -53,11 +59,11 @@ const updateProject = asyncHandler(async (req, res) => {
     }
 
     if (project) {
-        console.log(project)
-        project.tasks.push(title)
-        console.log(project)
+        // Add the task to the project
+        project.tasks.push(title)   
+        // Save the updated project
         await project.save()
-        console.log('Project was found in put request.')
+        // Return new project
         res.status(200).json(project)
     } else { 
         res.status(400)

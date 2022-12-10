@@ -2,7 +2,7 @@
 import Task from '../components/Task'
 import TaskForm from '../components/TaskForm'
 // Icons
-import {AiFillDelete } from 'react-icons/ai'
+import {AiFillCloseCircle } from 'react-icons/ai'
 import { useDispatch } from 'react-redux'
 import { deleteProject } from '../features/projects/projectSlice'
 
@@ -18,12 +18,14 @@ function Project({ project }) {
     <section className='project-container'>
       <div className='project-card-header'>
         <h2>{project.title}</h2>
-        <button onClick={handleDeleteProject}><AiFillDelete size={25} /></button>
+        <button onClick={handleDeleteProject}><AiFillCloseCircle size={25} /></button>
       </div>
       <TaskForm id={ project._id } />
+      <ul>
       {project.tasks.map((task, index) => { 
           return <Task key={index} task={ task } />
       })}
+        </ul>
     </section>
   )
 }

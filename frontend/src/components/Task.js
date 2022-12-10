@@ -1,10 +1,14 @@
-
+import {AiOutlineEdit, AiFillDelete } from 'react-icons/ai'
 
 function Task({ task }) {
   return (
-    <div>          
-          { task }
-    </div>
+    <li>
+      {task}
+      <div>
+        <AiOutlineEdit size={22}/>
+        <AiFillDelete size={22} />
+      </div>
+    </li>
   )
 }
 
