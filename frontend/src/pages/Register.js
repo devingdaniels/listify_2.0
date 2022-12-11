@@ -13,6 +13,7 @@ import {register, reset } from '../features/auth/authSlice'
 import Spinner from '../components/Spinner'
 import { VscAccount } from 'react-icons/vsc'
 
+
 const Register = () => {  
   // State variables 
   const [formData, setFormData] = useState({
@@ -65,7 +66,8 @@ const Register = () => {
       toast.error(message)
     }
 
-    if (isSuccess || user) {      
+    if (isSuccess && user) {
+      toast.success(message)
       navigate('/dashboard')
     }
 

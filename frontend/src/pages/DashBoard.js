@@ -18,31 +18,26 @@ import { toast } from 'react-toastify'
 function DashBoard() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  
   // Save the current logged in user
   const { user } = useSelector((state)=> state.auth)
   const { projects, isLoading, isSuccess, isError, message } = useSelector((state) => state.projects)
 
   useEffect(() => {    
-
+    // User not logged in, kick them to login page
+    if (user === null) {
+      toast.error('Not authorized')
+      navigate('/')
+    }
     if (isError) {       
       toast.error(message)
     }
-
-    if (!user) {
-      navigate('/')
-    }
-
     // Dispatch and fetch all projects from DB, will go into projects variable
     dispatch(getAllProjects())
-
     // Perform an action during component unmount by adding return statement
     return () => { 
       dispatch(reset())
     }
-  },[user, navigate, isError, message, dispatch])
-
-
+  },[user, isError, message, dispatch, navigate])
 
   if (isLoading) { 
     return <Spinner/>
@@ -52,7 +47,6 @@ function DashBoard() {
     <>
       <Header />
       <section className='dashboardContainer'>        
-        <h2>Welcome, {user && user.name.split(' ')[0]}!</h2>
         <ProjectForm />        
         {projects.map((project) => {           
           return <Project key={project._id} project={ project} />

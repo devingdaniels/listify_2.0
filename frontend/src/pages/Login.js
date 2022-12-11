@@ -40,16 +40,15 @@ const Login = () => {
       toast.error(message)
     }
 
-    if (isSuccess) { 
+    if ( isSuccess && user) {
       toast.success(message)
-    }
-
-    if (isSuccess || user) {      
       navigate('/dashboard')
     }
     
     // Reset the state
-    dispatch(reset())
+    return () => {
+      dispatch(reset())
+    }
 
   }, [user, isError, isSuccess, message, navigate, dispatch])
 
@@ -66,8 +65,6 @@ const Login = () => {
     }
     dispatch(login(userData))
   }
-
-  const goToRegister = () => { navigate('/register') }
 
   return (
     <>
@@ -97,7 +94,7 @@ const Login = () => {
           />          
           <button className='loginRegister' type='submit'>Login</button>              
         </form>
-        <button className='loginRegister' onClick={goToRegister}>Register</button>
+        <button className='loginRegister' onClick={()=>navigate('/register')}>Register</button>
         </section>
     </>
   )

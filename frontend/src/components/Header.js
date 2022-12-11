@@ -1,97 +1,50 @@
-// React 
-import { useEffect } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 // Redux and Auth
 import { useSelector, useDispatch } from 'react-redux'
 import { logout, reset } from '../features/auth/authSlice'
 // Icons
-import { BsCheck2Circle } from 'react-icons/bs'
 import { BiLogOutCircle  } from 'react-icons/bi'
-import { FiLogIn } from 'react-icons/fi'
+import { BsCheck2Circle } from 'react-icons/bs'
 
+// Notifications
+import { toast } from 'react-toastify'
 
 const Header = () => {
-// Hooks
-  const location = useLocation()
+  // Hooks
   const navigate = useNavigate()
   const dispatch = useDispatch()
   // Get user from the state
-  const { user } = useSelector((state) => state.auth)
+  const { user, isSuccess, message } = useSelector((state) => state.auth)
 
   const onLogout = () => {
     // Remove the user from local storage (JWT is key concept)
-    dispatch(logout())
+     dispatch(logout())
     // Reset the global state
-    dispatch(reset())
     // Redirect to login page
+    
+    if (!localStorage.getItem('user')) { 
+      toast.success('Logout successful')
+    }    
+    
+    dispatch(reset())
+
     navigate('/')
   }
 
-  if (user) { 
-    return (
-      <header>     
-      <div>
-        <BsCheck2Circle className='react-icon'/>
-        <h1>ListiFy</h1>
-      </div>
-      <ul>
-        <li>
-            <button onClick={onLogout}>
-              <div className='navTab'>
-                <BiLogOutCircle className='react-icon'/><span>Logout</span> 
-              </div>
-            </button>
-          </li>
-      </ul>      
-      </header>
-    )    
-  }
-
-
-  if (location.pathname === '/') {    
-    return (
+  return (
+    <>
       <header>
         <div>
-          <BsCheck2Circle className='react-icon' />
-          <h1>ListiFy</h1>
+         <BsCheck2Circle className='react-icon'/>
+         <h1>ListiFy</h1>
         </div>
-        <ul>
-          <li>            
-          </li>
-          <li>        
-      </li>
-        </ul>
-      </header>
-    )
-  }
-
-  if (location.pathname === '/register') {    
-    return (
-      <header>
         <div>
-          <BsCheck2Circle className='react-icon' />
-          <h1>ListiFy</h1>
+          <p>Hey, {user && user.name.split(' ')[0]}!</p>
+          <div onClick={onLogout} className='navTab'><BiLogOutCircle/><span>Logout</span></div>          
         </div>
-        <ul>
-          <li>            
-          </li>
-        </ul>
       </header>
-    )
-  } else {     
-    return (      
-      <header>     
-      <div>
-        <BsCheck2Circle className='react-icon'/>
-        <h1>ListiFy</h1>
-      </div>
-      <ul>
-        <li>        
-      </li>
-      </ul>      
-      </header>
-    )
-  }
+    </>
+  )
 }
 
 export default Header

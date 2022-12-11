@@ -1,12 +1,12 @@
 // Styling 
 import './App.css';
+import 'react-toastify/dist/ReactToastify.css'
 // App dependencies 
 import React from 'react';
 import { Routes, Route } from 'react-router-dom'
 
 // For notifications
 import { ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
 
 // Pages
 import LoginPage from './pages/Login'
