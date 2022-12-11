@@ -1,5 +1,5 @@
 // React 
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 // Redux and Auth
 import { useSelector, useDispatch } from 'react-redux'
@@ -9,6 +9,8 @@ import { BsCheck2Circle } from 'react-icons/bs'
 import { VscAccount } from 'react-icons/vsc'
 import { BiLogOutCircle  } from 'react-icons/bi'
 import { FiLogIn } from 'react-icons/fi'
+
+
 const Header = (props) => {
 // Hooks
   const location = useLocation()
@@ -45,7 +47,7 @@ const Header = (props) => {
         <li>
             <button onClick={onLogout}>
               <div className='navTab'>
-                <BiLogOutCircle /><span>Logout</span> 
+                <BiLogOutCircle className='react-icon'/><span>Logout</span> 
               </div>
             </button>
           </li>

@@ -43,6 +43,16 @@ button {
   border: none;
 }
 
+input {
+  font-size: 16px;
+  font-size: max(16px, 1em);
+  font-family: inherit;
+  padding: 0.25em 0.5em;
+  background-color: #fff;
+  border: 2px solid black;
+  border-radius: 4px;
+}
+
 /* HEADER CLASSES */
 
 .headerNavContainer {
@@ -51,13 +61,6 @@ button {
   align-items: center;
   cursor: pointer;
 }
-/* 
-.navTab {
-  display: flex;
-  align-items: center;
-  font-size: 1.5rem;
-  cursor: pointer;
-} */
 
 .navTab:hover {
   transform: translateY(-3px);
