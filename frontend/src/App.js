@@ -27,8 +27,7 @@ function App() {
         closeOnClick
         draggable
         pauseOnHover
-      />
-      {/* <Footer /> */}
+      />      
     </>
   );
 }

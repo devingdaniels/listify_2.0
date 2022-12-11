@@ -43,9 +43,13 @@ const createProject = asyncHandler(async (req, res) => {
 // @route   PUT /api/projects/:id
 // @access  Private
 const updateProject = asyncHandler(async (req, res) => {
-    const { id, title } = req.body
+    const { id, taskData } = req.body
 
-    if (title === '') { 
+    console.log(req.body)
+    console.log(id)
+    console.log(taskData)
+
+    if (taskData === '') { 
         res.status(400)
         throw new Error('Task needs a title')
     }
@@ -60,7 +64,7 @@ const updateProject = asyncHandler(async (req, res) => {
 
     if (project) {
         // Add the task to the project
-        project.tasks.push(title)   
+        project.tasks.push(taskData)   
         // Save the updated project
         await project.save()
         // Return new project

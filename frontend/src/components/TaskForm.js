@@ -17,17 +17,15 @@ function TaskForm({ id }) {
     const [task, setTask] = useState('')    
 
     const onSubmit = (e) => { 
+        // Prevent page reload
         e.preventDefault()
-
-
+        // Create payload
         const data = {
-            title: task,
-            id: id
+            id: id,
+            taskData: task,            
         }
         dispatch(updateProject(data))
-
-
-
+        // Reset state
         setTask('')        
     }
     

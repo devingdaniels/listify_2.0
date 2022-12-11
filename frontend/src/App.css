@@ -149,6 +149,10 @@ header li {
   align-items: center;
 }
 
+.update-task-container {
+  display: flex;
+}
+
 /* CSS */
 .loginRegister {
   align-items: center;

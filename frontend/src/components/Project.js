@@ -23,7 +23,7 @@ function Project({ project }) {
       <TaskForm id={ project._id } />
       <ul>
       {project.tasks.map((task, index) => { 
-          return <Task key={index} task={ task } />
+          return <Task key={index} task={task} id={ project._id } />
       })}
         </ul>
     </section>

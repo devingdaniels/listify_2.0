@@ -51,9 +51,9 @@ const updateProject = async (data, token) => {
             authorization: `Bearer ${token}`
         },        
     }    
-    // Send request with project data and bearer token
+    // Send request with project data and bearer token    
     const response = await axios.put(API_URL + data.id, data, config)
-
+    // Return project with updated task
     return response.data
 }
 
