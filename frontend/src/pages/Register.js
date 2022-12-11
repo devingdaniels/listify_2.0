@@ -75,6 +75,8 @@ const Register = () => {
   }, [user, isError, isSuccess, message, navigate, dispatch])
 
 
+  const goToLogin = () => { navigate('/') }
+
   if (isLoading) { 
     return <Spinner/>
   }
@@ -86,7 +88,7 @@ const Register = () => {
           <VscAccount />
           <h2>Register</h2>
         </div>
-        <h5>Sign Up and start ListiFying</h5>
+        <h5>Sign Up</h5>
       <form className='getUserDetailsForm' onSubmit={onSubmit}>        
         <input
           type="text"
@@ -130,6 +132,7 @@ const Register = () => {
           />        
         <button className='loginRegister' type='submit'>Create Account</button>
         </form>
+        <button className='loginRegister' onClick={ goToLogin }>Login</button>
         </section>
     </>
   )

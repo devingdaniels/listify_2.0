@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import ProjectForm from '../components/ProjectForm'
 import Project from '../components/Project'
 import Spinner from '../components/Spinner'
+import Header from '../components/Header'
 
 // Redux
 import { getAllProjects, reset} from '../features/projects/projectSlice';
@@ -49,6 +50,7 @@ function DashBoard() {
 
   return (
     <>
+      <Header />
       <section className='dashboardContainer'>        
         <h2>Welcome, {user && user.name.split(' ')[0]}!</h2>
         <ProjectForm />        

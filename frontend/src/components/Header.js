@@ -6,7 +6,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { logout, reset } from '../features/auth/authSlice'
 // Icons
 import { BsCheck2Circle } from 'react-icons/bs'
-import { VscAccount } from 'react-icons/vsc'
 import { BiLogOutCircle  } from 'react-icons/bi'
 import { FiLogIn } from 'react-icons/fi'
 
@@ -27,14 +26,6 @@ const Header = () => {
     // Redirect to login page
     navigate('/')
   }
-
-  const goToLogin = () => { navigate('./login') }
-  const goToRegister = () => { navigate('/register') }
-  
-
-  useEffect(() => { 
-
-  }, [navigate])
 
   if (user) { 
     return (
@@ -65,19 +56,9 @@ const Header = () => {
           <h1>ListiFy</h1>
         </div>
         <ul>
-          <li>
-            <button onClick={ goToLogin }>
-              <div className='navTab'>
-                <FiLogIn className='react-icon'/><span>Login</span>
-              </div>
-            </button>
+          <li>            
           </li>
-          <li>
-        <button onClick={goToRegister}>
-          <div className='navTab'>
-            <VscAccount className='react-icon'/> <span>Register</span>
-          </div>
-        </button>
+          <li>        
       </li>
         </ul>
       </header>
@@ -92,12 +73,7 @@ const Header = () => {
           <h1>ListiFy</h1>
         </div>
         <ul>
-          <li>
-            <button onClick={goToLogin}>
-              <div className='navTab'>
-                <FiLogIn className='react-icon' /> <span>Login</span>
-              </div>
-            </button>
+          <li>            
           </li>
         </ul>
       </header>
@@ -110,12 +86,7 @@ const Header = () => {
         <h1>ListiFy</h1>
       </div>
       <ul>
-        <li>
-        <button onClick={goToRegister}>
-          <div className='navTab'>
-            <VscAccount className='react-icon'/> <span>Register</span>
-          </div>
-        </button>
+        <li>        
       </li>
       </ul>      
       </header>

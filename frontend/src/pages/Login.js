@@ -60,14 +60,14 @@ const Login = () => {
 
   const onSubmit = (e) => { 
     e.preventDefault()
-
     const userData = {
       email,
       password
     }
-
     dispatch(login(userData))
   }
+
+  const goToRegister = () => { navigate('/register') }
 
   return (
     <>
@@ -76,7 +76,7 @@ const Login = () => {
           <FiLogIn/> 
           <h2>Login</h2>          
         </div>
-        <h5>Login and start ListiFy-ing</h5>
+        <h5>Welcome Back</h5>
       <form onSubmit={onSubmit}>  
         <input
           type="email"
@@ -94,9 +94,10 @@ const Login = () => {
             placeholder='Password'
             required
             onChange={onChange}
-          />
-        <button className='loginRegister' type='submit'>Login</button>
+          />          
+          <button className='loginRegister' type='submit'>Login</button>              
         </form>
+        <button className='loginRegister' onClick={goToRegister}>Register</button>
         </section>
     </>
   )
