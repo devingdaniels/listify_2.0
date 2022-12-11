@@ -11,7 +11,7 @@ import { BiLogOutCircle  } from 'react-icons/bi'
 import { FiLogIn } from 'react-icons/fi'
 
 
-const Header = (props) => {
+const Header = () => {
 // Hooks
   const location = useLocation()
   const navigate = useNavigate()
