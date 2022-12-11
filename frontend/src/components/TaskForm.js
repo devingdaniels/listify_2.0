@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 // Redux
 import { useDispatch } from 'react-redux'
-import { updateProject } from '../features/projects/projectSlice'
+import { addTaskToProject } from '../features/projects/projectSlice'
 
 
 
@@ -24,7 +24,7 @@ function TaskForm({ id }) {
             id: id,
             taskData: task,            
         }
-        dispatch(updateProject(data))
+        dispatch(addTaskToProject(data))
         // Reset state
         setTask('')        
     }

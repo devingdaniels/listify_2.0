@@ -44,8 +44,8 @@ const deleteProject = async (id, token) => {
     return response.data
 }
 
-// Create project
-const updateProject = async (data, token) => {    
+// Add task to existing project
+const addTaskToProject = async (data, token) => {    
     const config = {
         headers: {
             authorization: `Bearer ${token}`
@@ -57,11 +57,28 @@ const updateProject = async (data, token) => {
     return response.data
 }
 
+
+
+// Update a task in existing project
+const updateProjectTask = async (data, token) => {    
+    const config = {
+        headers: {
+            authorization: `Bearer ${token}`
+        },        
+    }    
+    // Send request with project data and bearer token    
+    const response = await axios.put(API_URL + data.id, data, config)
+    // Return project with updated task
+    return response.data
+}
+
+
 const projectService = {
     createProject,
     getAllProjects,
     deleteProject,
-    updateProject
+    addTaskToProject,
+    updateProjectTask
 } 
  
 export default projectService

@@ -61,12 +61,12 @@ export const deleteProject = createAsyncThunk('projects/deleteOne', async (id, t
 
 
 // Update project 
-export const updateProject = createAsyncThunk('projects/updateOne', async (data, thunkAPI) => { 
+export const addTaskToProject = createAsyncThunk('projects/updateOne', async (data, thunkAPI) => { 
     // data = {id, taskData}
     try {
         // PUT project route in DB is protected, need token
         const token = thunkAPI.getState().auth.user.token
-    return await projectService.updateProject(data, token)
+    return await projectService.addTaskToProject(data, token)
     } catch (error) {
         const message =
         (error.response && error.response.data && error.response.data.message) ||
@@ -130,25 +130,25 @@ export const projectSlice = createSlice({
                 state.isError = true
                 state.message = action.payload
             })
-            .addCase(updateProject.pending, (state) => { 
+            .addCase(addTaskToProject.pending, (state) => { 
             state.isLoading = true            
             })
-            .addCase(updateProject.fulfilled, (state, action) => { 
+            .addCase(addTaskToProject.fulfilled, (state, action) => { 
                 state.isLoading = false            
                 state.isSuccess = true
                 state.isError = false
-                // Getting an ID of deleted project from backend API                
-                state.projects = state.projects.filter((project) => {
-                    // Return all project except modified --> replace                    
-                    if (project._id !== action.payload.id) { 
+                // Getting an ID of deleted project from backend API
+                console.log(action.payload)
+                state.projects = state.projects.filter(project => {
+                    if (project._id !== action.payload._id) {
                         return project
-                    } else {
+                    } else { 
                         return action.payload
                     }
                 })
                 state.message = action.payload.message
             })
-            .addCase(updateProject.rejected, (state, action) => { 
+            .addCase(addTaskToProject.rejected, (state, action) => { 
                 state.isLoading = false
                 state.isSuccess = false
                 state.isError = true

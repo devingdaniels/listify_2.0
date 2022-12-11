@@ -23,7 +23,7 @@ const createProject = asyncHandler(async (req, res) => {
     }      
     // Create a new project linked to current user
     const project = await Project.create({
-        // User id is not needed, is coming from req set in middlware
+        // User id is not needed, is coming from req set in middleware
         user: req.user.id,
         title: req.body.title,
         tasks: []
@@ -34,7 +34,7 @@ const createProject = asyncHandler(async (req, res) => {
         throw new Error('Error creating new project')
     }
 
-    // Send back new project to front end
+    // Send new project to frontend
     res.status(200).json(project)
 })
 
@@ -42,7 +42,7 @@ const createProject = asyncHandler(async (req, res) => {
 // @desc    Update project
 // @route   PUT /api/projects/:id
 // @access  Private
-const updateProject = asyncHandler(async (req, res) => {
+const addTaskToProject = asyncHandler(async (req, res) => {
     const { id, taskData } = req.body
 
     console.log(req.body)
@@ -63,9 +63,9 @@ const updateProject = asyncHandler(async (req, res) => {
     }
 
     if (project) {
-        // Add the task to the project
-        project.tasks.push(taskData)   
-        // Save the updated project
+        // Add taskData to project array 
+        project.tasks.push(taskData)
+        // Save project
         await project.save()
         // Return new project
         res.status(200).json(project)
@@ -102,6 +102,6 @@ const deleteProject = asyncHandler(async (req, res) => {
 module.exports = {
     getProjects,
     createProject,
-    updateProject,
+    addTaskToProject,
     deleteProject
 }

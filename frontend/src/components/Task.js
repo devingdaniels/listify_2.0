@@ -7,7 +7,7 @@ import { BsCheck2Circle } from 'react-icons/bs'
 
 
 // Redux
-import { updateProject } from '../features/projects/projectSlice'
+import { addTaskToProject } from '../features/projects/projectSlice'
 import { useDispatch } from 'react-redux'
 
 function Task({ task, id }) {
@@ -34,7 +34,7 @@ function Task({ task, id }) {
       taskData: taskTitle,      
     }
 
-    dispatch(updateProject(data))    
+    dispatch(addTaskToProject(data))    
 
     setIsEditable(isEditable => isEditable = !isEditable)
 }
