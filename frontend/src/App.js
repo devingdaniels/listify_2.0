@@ -23,7 +23,7 @@ function App() {
       </Routes>
       <ToastContainer
         position='top-right'
-        autoClose={2500}
+        autoClose={1500}
         closeOnClick
         draggable
         pauseOnHover

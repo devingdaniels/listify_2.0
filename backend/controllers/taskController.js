@@ -83,9 +83,35 @@ const updateProjectTask = asyncHandler(async (req, res) => {
 // @route   DELETE /api/projects/task/:id
 // @access  Private (protected)
 const deleteTask = asyncHandler(async (req, res) => { 
-    console.log("Called deleteTask in backend")
-    console.log(req.body)
-    res.status(200).json({message: 'Update me'})
+    const { id, task } = req.body
+
+    // Ensure valid user
+    if (!req.user) { 
+        console.log('Invalid user')
+        throw new Error('No user found.')
+    }
+    // Ensure project exists
+    const project = await Project.findById(id)
+    if (project) {
+        
+        const updatedTasks = project.tasks.filter(el => el !== task )
+
+         const updatedProject = await Project.findByIdAndUpdate(
+            {
+                _id: id,                
+            },
+            {
+                tasks: updatedTasks
+            },
+            {new: true}
+        )    
+        
+        res.status(200).json(updatedProject)
+    } else { 
+        res.status(400)
+        throw new Error('Project not found')
+    }
+    
 })
 
 

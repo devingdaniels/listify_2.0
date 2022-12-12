@@ -6,12 +6,17 @@ import {AiFillCloseCircle } from 'react-icons/ai'
 import { useDispatch } from 'react-redux'
 import { deleteProject } from '../features/projects/projectSlice'
 
+
+import { toast } from 'react-toastify'
+
 function Project({ project }) {
     const dispatch = useDispatch()
 
     const handleDeleteProject = () => {
         // Pass ID of project --> slice --> backend      
-        dispatch(deleteProject(project._id))
+      dispatch(deleteProject(project._id))
+      
+      toast.success("Project delete successful")
     }
 
   return (
