@@ -61,7 +61,7 @@ export const deleteProject = createAsyncThunk('projects/deleteOne', async (id, t
 
 
 // Add a task to a given project 
-export const addTaskToProject = createAsyncThunk('projects/addTask', async (data, thunkAPI) => { 
+export const addTaskToProject = createAsyncThunk('projects/task/addTask', async (data, thunkAPI) => { 
     // data = {id, taskData}
     try {
         // PUT project route in DB is protected, need token
@@ -77,13 +77,30 @@ export const addTaskToProject = createAsyncThunk('projects/addTask', async (data
 })
 
 export const updateProjectTask = createAsyncThunk(
-    'projects/updateTask',
+    'projects/task/updateTask',
     async (data, thunkAPI) => { 
     // data = {id, taskData}
     try {
         // PUT project route in DB is protected, need token
         const token = thunkAPI.getState().auth.user.token
     return await projectService.updateProjectTask(data, token)
+    } catch (error) {
+        const message =
+        (error.response && error.response.data && error.response.data.message) ||
+        error.message ||
+        error.toString()
+        return thunkAPI.rejectWithValue(message)  
+    }
+    })
+
+export const deleteTask = createAsyncThunk(
+    'projects/task/deleteTask',
+    async (data, thunkAPI) => { 
+    // data = {id, task}
+    try {
+        // DELETE project route in DB is protected, need token
+        const token = thunkAPI.getState().auth.user.token
+    return await projectService.deleteTask(data, token)
     } catch (error) {
         const message =
         (error.response && error.response.data && error.response.data.message) ||
@@ -188,6 +205,29 @@ export const projectSlice = createSlice({
                 state.message = action.payload.message
             })
             .addCase(updateProjectTask.rejected, (state, action) => { 
+                state.isLoading = false
+                state.isSuccess = false
+                state.isError = true
+                state.message = action.payload
+            })
+            .addCase(deleteTask.pending, (state) => { 
+            state.isLoading = true            
+            })
+            .addCase(deleteTask.fulfilled, (state, action) => { 
+                state.isLoading = false            
+                state.isSuccess = true
+                state.isError = false
+                // Getting an ID of updated project from backend API
+                state.projects = state.projects.filter(project => {
+                    if (project._id !== action.payload._id) {
+                        return project
+                    } else { 
+                        return action.payload
+                    }
+                })
+                state.message = action.payload.message
+            })
+            .addCase(deleteTask.rejected, (state, action) => { 
                 state.isLoading = false
                 state.isSuccess = false
                 state.isError = true

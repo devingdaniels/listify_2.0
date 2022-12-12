@@ -1,27 +1,28 @@
 // React
 import { useState } from 'react'
-
 // Icons
 import {AiOutlineEdit, AiFillDelete } from 'react-icons/ai'
-import { BsCheck2Circle } from 'react-icons/bs'
-
-
 // Redux
-import { updateProjectTask } from '../features/projects/projectSlice'
+import { updateProjectTask, deleteTask } from '../features/projects/projectSlice'
 import { useDispatch } from 'react-redux'
 
 function Task({ task, id }) {
   const dispatch = useDispatch()
-
+  
   const [isEditable, setIsEditable] = useState(false)
   const [taskTitle, setTaskTitle] = useState(task)
 
-  const handleEditTask = () => {
+  const toggleEditTask = () => {
     setIsEditable(isEditable => isEditable = !isEditable)
   }
   
   const handleDeleteTask = () => {
-    console.log('delete task')
+    // Pass ID of project and the name of the task
+    const data = {
+      id: id,      
+      task: task
+    }
+    dispatch(deleteTask(data))
   }
 
   
@@ -29,15 +30,19 @@ function Task({ task, id }) {
     // Prevent page reload
     e.preventDefault()
     // Pass data to reducer, which will make http PUT to backend - also need project ID for protected route
+    // Don't make network request if data has not changed
+    if (taskTitle === task) { 
+      toggleEditTask()
+      return 
+    }
     const data = {
       id: id,
       taskData: taskTitle,
       oldTask: task
     }
-
-    dispatch(updateProjectTask(data))    
-
-    setIsEditable(isEditable => isEditable = !isEditable)
+    // Make network request 
+    dispatch(updateProjectTask(data))
+    toggleEditTask()
 }
 
 
@@ -50,7 +55,7 @@ function Task({ task, id }) {
             value={taskTitle}
             onChange={(e) => setTaskTitle(e.target.value)}          
             />
-          <button type='submit'><BsCheck2Circle /></button>
+          <button type='submit'><AiOutlineEdit /></button>
         </div>
       </form>
     )
@@ -60,7 +65,7 @@ function Task({ task, id }) {
       <>
         <div className='update-task-container' >
         <p>{taskTitle}</p>
-          <AiOutlineEdit onClick={handleEditTask} size={22} />
+          <AiOutlineEdit onClick={toggleEditTask} size={22} />
           <AiFillDelete onClick={handleDeleteTask} size={22} />
           </div>
       </>

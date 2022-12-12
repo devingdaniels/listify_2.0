@@ -52,11 +52,10 @@ const addTaskToProject = async (data, token) => {
         },        
     }    
     // Send request with project data and bearer token    
-    const response = await axios.post(API_URL + data.id, data, config)
+    const response = await axios.post(API_URL + 'task/' + data.id, data, config)
     // Return project with updated task
     return response.data
 }
-
 
 
 // Update a task in existing project
@@ -67,7 +66,23 @@ const updateProjectTask = async (data, token) => {
         }  
     }    
     // Send request with project data and bearer token    
-    const response = await axios.put(API_URL + data.id, data, config)
+    const response = await axios.put(API_URL + 'task/' + data.id, data, config)
+    // Return project with updated task
+    return response.data
+}
+
+
+// Delete existing task from a project
+const deleteTask = async (data, token) => {    
+    const config = {
+        headers: {
+            authorization: `Bearer ${token}`
+        },        
+    }    
+    // Send request with project data and bearer token
+    console.log(data)
+    console.log(token)
+    const response = await axios.delete(API_URL + 'task/' + data.id, data, config)
     // Return project with updated task
     return response.data
 }
@@ -78,7 +93,8 @@ const projectService = {
     getAllProjects,
     deleteProject,
     addTaskToProject,
-    updateProjectTask
+    updateProjectTask,
+    deleteTask
 } 
  
 export default projectService
