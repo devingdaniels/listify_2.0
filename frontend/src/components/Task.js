@@ -7,7 +7,7 @@ import { BsCheck2Circle } from 'react-icons/bs'
 
 
 // Redux
-import { addTaskToProject } from '../features/projects/projectSlice'
+import { updateProjectTask } from '../features/projects/projectSlice'
 import { useDispatch } from 'react-redux'
 
 function Task({ task, id }) {
@@ -31,10 +31,11 @@ function Task({ task, id }) {
     // Pass data to reducer, which will make http PUT to backend - also need project ID for protected route
     const data = {
       id: id,
-      taskData: taskTitle,      
+      taskData: taskTitle,
+      oldTask: task
     }
 
-    dispatch(addTaskToProject(data))    
+    dispatch(updateProjectTask(data))    
 
     setIsEditable(isEditable => isEditable = !isEditable)
 }

@@ -5,8 +5,6 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { addTaskToProject } from '../features/projects/projectSlice'
 
-
-
 // Components
 import { MdAddCircleOutline } from 'react-icons/md'
 
