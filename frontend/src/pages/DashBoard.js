@@ -1,7 +1,6 @@
 // React
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
 
 // Components
 import ProjectForm from '../components/ProjectForm'
@@ -10,9 +9,10 @@ import Spinner from '../components/Spinner'
 import Header from '../components/Header'
 
 // Redux
+import { useSelector, useDispatch } from 'react-redux';
 import { getAllProjects, reset} from '../features/projects/projectSlice';
 
-// Toastify
+// Notifications
 import { toast } from 'react-toastify'
 
 function DashBoard() {
@@ -23,16 +23,19 @@ function DashBoard() {
   const { projects, isLoading, isError, message } = useSelector((state) => state.projects)
 
   useEffect(() => {    
-    // User not logged in, kick them to login page
-    if (user === null){
-      toast.error('Not authorized')
-      navigate('/')
+
+    if (user !== null) {
+      // Dispatch and fetch all projects from DB, will go into projects variable
+      dispatch(getAllProjects())
+      
+    } else {       
+      navigate('/') 
     }
+    
     if (isError) {       
       toast.error(message)
     }
-    // Dispatch and fetch all projects from DB, will go into projects variable
-    dispatch(getAllProjects())
+    
     // Perform an action during component unmount by adding return statement
     return () => { 
       dispatch(reset())

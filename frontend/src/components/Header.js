@@ -38,9 +38,9 @@ const Header = () => {
          <BsCheck2Circle className='react-icon'/>
          <h1>ListiFy</h1>
         </div>
-        <div>
+        <div className='login-button-container'>
           <p>Hey, {user && user.name.split(' ')[0]}!</p>
-          <div onClick={onLogout} className='navTab'><BiLogOutCircle/><span>Logout</span></div>          
+          <div onClick={onLogout} className='navTab'><p>Logout</p><BiLogOutCircle/></div>          
         </div>
       </header>
     </>

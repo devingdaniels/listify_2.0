@@ -5,6 +5,7 @@
   padding: 0;
   margin: 0;
   color: rgb(0, 252, 84);
+  pointer-events: all;
 }
 
 body {
@@ -46,6 +47,12 @@ input {
   background-color: #fff;
   border: 2px solid black;
   border-radius: 4px;
+  cursor: pointer;
+}
+
+button {
+  background: none;
+  border: none;
 }
 
 /* HEADER CLASSES */
@@ -54,6 +61,9 @@ input {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+}
+.navTab {
   cursor: pointer;
 }
 
@@ -71,6 +81,11 @@ header ul {
 
 header li {
   margin-left: 10px;
+}
+.login-button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 /* LOGIN AND REGISTER PAGES */
@@ -137,20 +152,14 @@ header li {
   padding: 1%;
 }
 
-.project-card-header {
+.project-card-heading {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 1%;
 }
 
 .task-form {
-  margin: 1% 0;
-  display: flex;
-  align-items: center;
-}
-
-.update-task-container {
-  display: flex;
 }
 
 /* CSS */

@@ -15,8 +15,7 @@ function ProjectForm() {
       setTitle('')      
     }
 
-    return (
-      <section>
+    return (      
         <form onSubmit={handleSubmit}>            
             <input
                 type="text"
@@ -28,8 +27,7 @@ function ProjectForm() {
                 onChange={(e) => setTitle(e.target.value)}
                 />
                 <button type='submit'>Add Project</button>
-        </form>
-    </section>
+        </form>    
   )
 }
 

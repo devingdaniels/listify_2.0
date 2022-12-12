@@ -6,6 +6,9 @@ import {AiOutlineEdit, AiFillDelete } from 'react-icons/ai'
 import { updateProjectTask, deleteTask } from '../features/projects/projectSlice'
 import { useDispatch } from 'react-redux'
 
+// Components 
+import TaskForm from '../components/TaskForm'
+
 function Task({ task, id }) {
   const dispatch = useDispatch()
   
@@ -48,13 +51,9 @@ function Task({ task, id }) {
 
   if (isEditable) {
     return (
-      <form onSubmit={handleUpdateTask}>
+      <form onSubmit={handleUpdateTask} className='task-form'>
         <div className='update-task-container'>
-          <input
-            type="text"
-            value={taskTitle}
-            onChange={(e) => setTaskTitle(e.target.value)}          
-            />
+          <TaskForm/>
           <button type='submit'><AiOutlineEdit /></button>
         </div>
       </form>

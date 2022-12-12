@@ -21,9 +21,9 @@ function Project({ project }) {
 
   return (
     <section className='project-container'>
-      <div className='project-card-header'>
+      <div className='project-card-heading'>
         <h2>{project.title}</h2>
-        <button onClick={handleDeleteProject}><AiFillCloseCircle size={25} /></button>
+        <button><AiFillCloseCircle onClick={handleDeleteProject} size={25} /></button>
       </div>
       <TaskForm id={ project._id } />
       <ul>

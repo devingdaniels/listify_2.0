@@ -9,10 +9,15 @@ import { addTaskToProject } from '../features/projects/projectSlice'
 import { MdAddCircleOutline } from 'react-icons/md'
 
 
-function TaskForm({ id }) { 
+function TaskForm({ id }) {
+    
     const dispatch = useDispatch()
-
-    const [task, setTask] = useState('')    
+    const [task, setTask] = useState('')
+    const [isEditable, setIsEditable] = useState(false)
+    
+    const toggleEditTask = () => {
+    setIsEditable(isEditable => isEditable = !isEditable)
+  }
 
     const onSubmit = (e) => { 
         // Prevent page reload
@@ -36,7 +41,19 @@ function TaskForm({ id }) {
               value={task}
               onChange={ (e)=> setTask(e.target.value) }            
           />
-          <button type='submit'><MdAddCircleOutline size={ 20 } /></button> 
+          <input
+              type="text"              
+              placeholder='Description'
+              value={task}
+              onChange={ (e)=> setTask(e.target.value) }            
+          />
+          <input
+              type="date"
+              placeholder='My New Task'              
+              onChange={ (e)=> setTask(e.target.value) }            
+          />
+          
+          <button ><MdAddCircleOutline type='submit' size={ 20 } /></button> 
     </form>
   )
 }
