@@ -6,18 +6,15 @@ const User = require('../models/userModel')
 // Ensure Bearer token exists 
 // Save the token, decode, and get user from payload(id in token)
 // If problem or no token, no auth
-const protect = asyncHandler(async(req, res, next) => { 
+const protect = asyncHandler(async (req, res, next) => {     
     let token
     // Check auth headers for Bearer 'exampleToken'
-    if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) { 
-        
+    if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {         
         try {
-            // Save token from header
-            // [Bearer, tokenID]
-            token = req.headers.authorization.split(' ')[1]            
+            // Save token from header            
+            token = req.headers.authorization.split(' ')[1] // [Bearer, token]
             // Next, verify the token
             const decoded = jwt.verify(token, process.env.JWT_SECRET)
-            console.log(decoded)
             // Get user from the token, and set the current user
             req.user = await User.findById(decoded.id).select('-password')            
             // Call next piece of middleware

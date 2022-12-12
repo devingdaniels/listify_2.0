@@ -44,7 +44,7 @@ export const getAllProjects = createAsyncThunk('projects/getAll', async (_, thun
 })
 
 
-// Retrieve projects 
+// Delete a project
 export const deleteProject = createAsyncThunk('projects/deleteOne', async (id, thunkAPI) => { 
     try {
         // DELETE project route in DB is protected, need token
@@ -99,7 +99,7 @@ export const deleteTask = createAsyncThunk(
     // data = {id, task}
     try {
         // DELETE project route in DB is protected, need token
-        const token = thunkAPI.getState().auth.user.token
+        const token = thunkAPI.getState().auth.user.token        
     return await projectService.deleteTask(data, token)
     } catch (error) {
         const message =
@@ -110,7 +110,6 @@ export const deleteTask = createAsyncThunk(
     }
 })
 
-
 export const projectSlice = createSlice({
     name: 'project',
     initialState: initialState,
@@ -119,6 +118,8 @@ export const projectSlice = createSlice({
     },
     extraReducers: (builder) => { 
         builder
+            
+            // CREATE A PROJECT
             .addCase(createProject.pending, (state) => { 
             state.isLoading = true            
             })
@@ -133,6 +134,8 @@ export const projectSlice = createSlice({
                 state.isSuccess = false
                 state.message = action.payload
             })
+
+            // GET ALL PROJECTS
             .addCase(getAllProjects.pending, (state) => { 
             state.isLoading = true            
             })
@@ -146,6 +149,8 @@ export const projectSlice = createSlice({
                 state.isError = true
                 state.message = action.payload
             })
+
+            // DELETE PROJECT
             .addCase(deleteProject.pending, (state) => { 
             state.isLoading = true            
             })
@@ -164,6 +169,8 @@ export const projectSlice = createSlice({
                 state.isError = true
                 state.message = action.payload
             })
+            
+            // ADD TASK
             .addCase(addTaskToProject.pending, (state) => { 
             state.isLoading = true            
             })
@@ -187,6 +194,8 @@ export const projectSlice = createSlice({
                 state.isError = true
                 state.message = action.payload
             })
+
+            // UPDATE TASK
             .addCase(updateProjectTask.pending, (state) => { 
             state.isLoading = true            
             })
@@ -210,7 +219,9 @@ export const projectSlice = createSlice({
                 state.isError = true
                 state.message = action.payload
             })
-            .addCase(deleteTask.pending, (state) => { 
+
+            // DELETE TASK
+            .addCase(deleteTask.pending, (state) => {
             state.isLoading = true            
             })
             .addCase(deleteTask.fulfilled, (state, action) => { 

@@ -20,11 +20,11 @@ function DashBoard() {
   const dispatch = useDispatch()
   // Save the current logged in user
   const { user } = useSelector((state)=> state.auth)
-  const { projects, isLoading, isSuccess, isError, message } = useSelector((state) => state.projects)
+  const { projects, isLoading, isError, message } = useSelector((state) => state.projects)
 
   useEffect(() => {    
     // User not logged in, kick them to login page
-    if (user === null) {
+    if (user === null){
       toast.error('Not authorized')
       navigate('/')
     }

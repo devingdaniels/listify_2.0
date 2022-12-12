@@ -1,9 +1,7 @@
-// Imports
+// Middleware 
 const asyncHandler = require('express-async-handler')
-
 // Database model 
 const Project = require('../models/projectModel')
-
 
 // @desc    Add a task to a project
 // @route   POST /api/projects/api/projects/:id
@@ -40,10 +38,9 @@ const addTaskToProject = asyncHandler(async (req, res) => {
 
 
 // @desc    Edit an existing task in a project
-// @route   PUT /api/projects/api/projects/:id
+// @route   PUT /api/projects/:id
 // @access  Private (protected)
 const updateProjectTask = asyncHandler(async (req, res) => { 
-    console.log("Called")
     const { id, taskData, oldTask } = req.body
     
     if (taskData === '') { 
@@ -57,7 +54,6 @@ const updateProjectTask = asyncHandler(async (req, res) => {
     }
     // Ensure project exists
     const project = await Project.findById(id)
-
     if (project) {
         const newTasks = project.tasks.map(task => { 
             if (task != oldTask) {
@@ -66,7 +62,6 @@ const updateProjectTask = asyncHandler(async (req, res) => {
                 return taskData
             }
         })        
-        
         const updatedProject = await Project.findByIdAndUpdate(
             {
                 _id: id,                
@@ -84,16 +79,13 @@ const updateProjectTask = asyncHandler(async (req, res) => {
 })
 
 
+// @desc    Delete an existing task in a project
+// @route   DELETE /api/projects/task/:id
+// @access  Private (protected)
 const deleteTask = asyncHandler(async (req, res) => { 
-
     console.log("Called deleteTask in backend")
-    const { id, task } = req.body
-
-    console.log(task)
-
-    res.status(200).json({message: 'Updated me'})    
-
-
+    console.log(req.body)
+    res.status(200).json({message: 'Update me'})
 })
 
 

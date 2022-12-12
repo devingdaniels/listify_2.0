@@ -5,7 +5,7 @@ const { addTaskToProject, updateProjectTask, deleteTask } = require('../controll
 
 const { protect } = require('../middleware/authMiddleware')
 
-// Project + task routes
+// API/projects/task/
 router.post('/:id', protect, addTaskToProject)
 router.put('/:id', protect, updateProjectTask)
 router.delete('/:id', protect, deleteTask)
