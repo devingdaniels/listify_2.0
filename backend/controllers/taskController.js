@@ -8,18 +8,26 @@ const Project = require('../models/projectModel')
 // @access  Private (protected)
 const addTaskToProject = asyncHandler(async (req, res) => {
     const { id, taskData } = req.body
-    
-    if (taskData === '') { 
-        res.status(400)
-        throw new Error('Task needs a title')
-    }
     // Ensure valid user
     if (!req.user) { 
         console.log('Invalid user')
         throw new Error('No user found.')
     }
+
+    if (taskData === '') { 
+        res.status(400)
+        throw new Error('Task needs a title')
+    }
+
     // Ensure project exists
     const project = await Project.findById(id)
+
+    // Ensure there is not an existing task with same title
+    if (project.tasks.some(task => task === taskData)) { 
+        res.status(400)
+        throw new Error(`Task "${taskData}" already exists.`)
+    }
+
 
     if (project) {
         // Add taskData to project array 

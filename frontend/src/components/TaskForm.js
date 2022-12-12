@@ -17,11 +17,12 @@ function TaskForm({ id }) {
     const onSubmit = (e) => { 
         // Prevent page reload
         e.preventDefault()
-        // Create payload
+        // Pass ID of project and title of task
         const data = {
             id: id,
             taskData: task,            
         }
+        // Create payload        
         dispatch(addTaskToProject(data))
         // Reset state
         setTask('')        
