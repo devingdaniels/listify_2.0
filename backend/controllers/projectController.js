@@ -106,10 +106,7 @@ const updateProjectTask = asyncHandler(async (req, res) => {
                 tasks: newTasks
             },
             {new: true}
-        )
-
-
-        console.log(updatedProject)
+        )        
         res.status(200).json(updatedProject)
     } else { 
         res.status(400)
@@ -124,11 +121,19 @@ const updateProjectTask = asyncHandler(async (req, res) => {
 const deleteProject = asyncHandler(async (req, res) => {
     // Find project
     const id = req.params.id
-    const project = Project.findById(id)
+    const project = await Project.findById(id)
+
 
     try {
-        const response = await Project.deleteOne({id})
-        res.status(200).json({message: 'Project deleted' })
+        const isRemoved = project.remove()
+        // Send back id so projectSlice reducer can remove it from state 
+        if (isRemoved) {
+            res.status(200).json(id)
+        } else { 
+            res.status(400).json({ message: 'Error removing project' })
+            throw new Error('Failed to delete project')
+        }
+        
     } catch (error) {
         console.log(error)
         res.status(400)

@@ -46,8 +46,9 @@ function DashBoard() {
   return (
     <>
       <Header />
-      <section className='dashboardContainer'>        
-        <ProjectForm />        
+      <section className='dashboardContainer'>      
+        <ProjectForm />
+        { console.log(projects)}
         {projects.map((project) => {           
           return <Project key={project._id} project={ project} />
         }) }        

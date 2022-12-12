@@ -137,7 +137,7 @@ export const projectSlice = createSlice({
                 state.isSuccess = true
                 state.isError = false
                 // Getting an ID of deleted project from backend API
-                // Filter out deleted goal from state so UI updates correctly 
+                // Filter out deleted goal from state so UI updates correctly
                 state.projects = state.projects.filter((project) => project._id !== action.payload.id)
                 state.message = action.payload.message
             })
@@ -178,9 +178,13 @@ export const projectSlice = createSlice({
                 state.isSuccess = true
                 state.isError = false
                 // Getting an ID of deleted project from backend API
-                console.log(action.payload)
-
-                // state.projects = state.projects
+                state.projects = state.projects.filter(project => {
+                    if (project._id !== action.payload._id) {
+                        return project
+                    } else { 
+                        return action.payload
+                    }
+                })
                 state.message = action.payload.message
             })
             .addCase(updateProjectTask.rejected, (state, action) => { 

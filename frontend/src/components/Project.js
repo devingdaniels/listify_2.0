@@ -10,7 +10,8 @@ function Project({ project }) {
     const dispatch = useDispatch()
 
     const handleDeleteProject = () => {
-        // Pass ID of project --> slice --> backend        
+        // Pass ID of project --> slice --> backend
+      console.log(project._id)
         dispatch(deleteProject(project._id))
     }
 
