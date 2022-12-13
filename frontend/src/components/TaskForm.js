@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux'
 import { addTaskToProject } from '../features/projects/projectSlice'
 
 // Icons
-import { BsStar } from 'react-icons/bs'
+import { BsStar, BsStarFill } from 'react-icons/bs'
 
 
 function TaskForm({ id }) {
@@ -16,19 +16,26 @@ function TaskForm({ id }) {
         description: '',
         isFavorite: false
     })
+    const resetState = () => { setTaskData({
+        title: '',
+        description: '',
+        isFavorite: false
+    })}
     const [isEditable, setIsEditable] = useState(false)
 
     // METHODS
     const dispatch = useDispatch()
-    const toggleEditTask = () => { setIsEditable(isEditable => isEditable = !isEditable)}
+    const toggleEditTask = () => {
+        setIsEditable(isEditable => isEditable = !isEditable)
+        resetState()
+    }
     const handleOnChange = (e) => {setTaskData((prevState) => ({ ...prevState, [e.target.name]: e.target.value }))}
     const toggleIsFav = () => {
         setTaskData({
             title: taskData.title,
             description: taskData.description,
             isFavorite: !taskData.isFavorite
-        })
-        console.log(taskData)
+        })        
     }
 
     const onSubmit = (e) => { 
@@ -39,16 +46,15 @@ function TaskForm({ id }) {
             id: id,
             taskData: taskData,            
         }
-        // Create payload
-        console.log(taskData)
-        // dispatch(addTaskToProject(data))
+        // Create payload        
+        dispatch(addTaskToProject(data))
         // Reset state
-        // setTaskData({
-        //     title: '',
-        //     description: '',
-        //     favorite: false
-        // })        
-    }    
+        setTaskData({
+            title: '',
+            description: '',
+            favorite: false
+        })        
+    }   
 
     if (isEditable) {
         return (    
@@ -69,7 +75,7 @@ function TaskForm({ id }) {
                     defaultValue={taskData.description}
                     onChange={ handleOnChange }
                 />                
-                <BsStar onClick={toggleIsFav} />               
+                { taskData.isFavorite ? (<><div className='isFavoriteTask'><p>Favorite: </p><BsStarFill onClick={toggleIsFav}/></div></>) : (<><div className='isFavoriteTask'><p>Favorite: </p><BsStar onClick={toggleIsFav}/></div></>)}
                 <button type='button' className='task-section-button' onClick={() => toggleEditTask()}>Cancel</button>
                 <button type='submit' className='task-section-button'>Add</button>                     
             </form>

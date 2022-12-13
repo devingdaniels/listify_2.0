@@ -7,31 +7,33 @@ const Project = require('../models/projectModel')
 // @route   POST /api/projects/api/projects/:id
 // @access  Private (protected)
 const addTaskToProject = asyncHandler(async (req, res) => {
-    const { id, taskData } = req.body
     // Ensure valid user
-    if (!req.user) { 
+    if (!req.user) {
         console.log('Invalid user')
         throw new Error('No user found.')
     }
 
-    if (taskData === '') { 
+    // Get the data
+    const { id } = req.body
+    const { title } = req.body.taskData
+    
+     if (title === '') { 
         res.status(400)
         throw new Error('Task needs a title')
-    }
-
-    // Ensure project exists
+     }
+    
+    // Get project in DB, perform checks
     const project = await Project.findById(id)
-
+    
     // Ensure there is not an existing task with same title
-    if (project.tasks.some(task => task === taskData)) { 
+    if (project.tasks.some(task => task.title === title)) { 
         res.status(400)
         throw new Error(`Task "${taskData}" already exists.`)
     }
 
-
     if (project) {
         // Add taskData to project array 
-        project.tasks.push(taskData)
+        project.tasks.push(req.body.taskData)
         // Save project
         await project.save()
         // Return new project
@@ -40,8 +42,31 @@ const addTaskToProject = asyncHandler(async (req, res) => {
         res.status(400)
         throw new Error('Project not found')
     }
-    
 })
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

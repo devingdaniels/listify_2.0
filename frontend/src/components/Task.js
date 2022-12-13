@@ -64,7 +64,7 @@ function Task({ task, id }) {
     return (
       <>
         <div className='update-task-container' >
-        <p>{taskTitle}</p>
+        <p>{task.title}</p>
           <AiOutlineEdit onClick={toggleEditTask} size={22} />
           <AiFillDelete onClick={handleDeleteTask} size={22} />
           </div>

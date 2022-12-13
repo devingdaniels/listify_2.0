@@ -62,7 +62,7 @@ export const deleteProject = createAsyncThunk('projects/deleteOne', async (id, t
 
 // Add a task to a given project 
 export const addTaskToProject = createAsyncThunk('projects/task/addTask', async (data, thunkAPI) => { 
-    // data = {id, taskData}
+    // data = {id, data: {title, desc, isFav}}
     try {
         // PUT project route in DB is protected, need token
         const token = thunkAPI.getState().auth.user.token
