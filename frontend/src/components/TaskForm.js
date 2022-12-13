@@ -5,12 +5,9 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { addTaskToProject } from '../features/projects/projectSlice'
 
-// Components
-import { MdAddCircleOutline } from 'react-icons/md'
-
 
 function TaskForm({ id }) {
-    
+
     const dispatch = useDispatch()
     const [task, setTask] = useState('')
     const [isEditable, setIsEditable] = useState(false)
@@ -33,29 +30,36 @@ function TaskForm({ id }) {
         setTask('')        
     }
     
-  return (
-      <form onSubmit={onSubmit} className='task-form'>
-          <input
-              type="text"
-              placeholder='My New Task'
-              value={task}
-              onChange={ (e)=> setTask(e.target.value) }            
-          />
-          <input
-              type="text"              
-              placeholder='Description'
-              value={task}
-              onChange={ (e)=> setTask(e.target.value) }            
-          />
-          <input
-              type="date"
-              placeholder='My New Task'              
-              onChange={ (e)=> setTask(e.target.value) }            
-          />
-          
-          <button ><MdAddCircleOutline type='submit' size={ 20 } /></button> 
-    </form>
-  )
+    if (isEditable) {
+        return (    
+            <form onSubmit={onSubmit} className='task-form'>
+                <input
+                    type="text"
+                    placeholder='Title'
+                    value={task}
+                    onChange={ (e)=>  setTask(e.target.value)}
+                />
+                <textarea
+                    type="text"
+                    placeholder='Description'
+                />
+                <button
+                    type="radio"
+                    placeholder='Title'  
+                ></button>                
+                <button type='button' className='task-section-button' onClick={() => toggleEditTask()}>Cancel</button>
+                <button type='submit' className='task-section-button' >Add</button>                     
+            </form>
+        )
+    }
+    else { 
+        return (                                    
+            <button type='button' className='task-section-button' onClick={() => toggleEditTask()}>Add Task</button>
+        )
+    }
 }
 
 export default TaskForm
+
+
+// 

@@ -26,6 +26,7 @@ function Task({ task, id }) {
       task: task
     }
     dispatch(deleteTask(data))
+    setTaskTitle('')
   }
 
   
