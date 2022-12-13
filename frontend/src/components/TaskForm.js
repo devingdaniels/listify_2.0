@@ -16,20 +16,33 @@ function TaskForm({ id }) {
         description: '',
         isFavorite: false
     })
-    const resetState = () => { setTaskData({
-        title: '',
-        description: '',
-        isFavorite: false
-    })}
     const [isEditable, setIsEditable] = useState(false)
+    
+
+    const dispatch = useDispatch()
 
     // METHODS
-    const dispatch = useDispatch()
+    const resetState = () => {
+        setTaskData({
+            title: '',
+            description: '',
+            isFavorite: false
+        })
+    }
+    
     const toggleEditTask = () => {
         setIsEditable(isEditable => isEditable = !isEditable)
         resetState()
     }
-    const handleOnChange = (e) => {setTaskData((prevState) => ({ ...prevState, [e.target.name]: e.target.value }))}
+
+    const handleOnChange = (e) => {
+        setTaskData((prevState) => (
+            {
+                ...prevState,
+                [e.target.name]: e.target.value
+            }))
+    }
+    
     const toggleIsFav = () => {
         setTaskData({
             title: taskData.title,
@@ -49,11 +62,7 @@ function TaskForm({ id }) {
         // Create payload        
         dispatch(addTaskToProject(data))
         // Reset state
-        setTaskData({
-            title: '',
-            description: '',
-            favorite: false
-        })        
+        resetState()      
     }   
 
     if (isEditable) {
@@ -89,6 +98,3 @@ function TaskForm({ id }) {
 }
 
 export default TaskForm
-
-
-// 

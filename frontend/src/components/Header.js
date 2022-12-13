@@ -5,7 +5,6 @@ import { logout, reset } from '../features/auth/authSlice'
 // Icons
 import { BiLogOutCircle  } from 'react-icons/bi'
 import { BsCheck2Circle } from 'react-icons/bs'
-
 // Notifications
 import { toast } from 'react-toastify'
 
@@ -14,36 +13,32 @@ const Header = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   // Get user from the state
-  const { user, isSuccess, message } = useSelector((state) => state.auth)
-
+  const { user } = useSelector((state) => state.auth)
+  // Methods
   const onLogout = () => {
     // Remove the user from local storage (JWT is key concept)
-     dispatch(logout())
-    // Reset the global state
-    // Redirect to login page
-    
+     dispatch(logout())    
+    // Notify user of successful logout
     if (!localStorage.getItem('user')) { 
       toast.success('Logout successful')
     }    
-    
+    // Reset Redux state
     dispatch(reset())
-
+    // Redirect to login page
     navigate('/')
   }
 
-  return (
-    <>
-      <header>
+  return (    
+      <header className='header'>
         <div>
-         <BsCheck2Circle className='react-icon'/>
+         <BsCheck2Circle size={33}/>
          <h1>ListiFy</h1>
         </div>
-        <div className='login-button-container'>
-          <p>Hey, {user && user.name.split(' ')[0]}!</p>
-          <div onClick={onLogout} className='navTab'><p>Logout</p><BiLogOutCircle/></div>          
+        <div className='header-logout-container'>
+          <h3>Hey, {user && user.name.split(' ')[0]}!</h3>
+          <button onClick={onLogout} className='header-logout-button'><p>Logout</p><BiLogOutCircle/></button>          
         </div>
-      </header>
-    </>
+      </header>    
   )
 }
 

@@ -1,19 +1,20 @@
 // React
 import { useState } from 'react'
-// Icons
-import {AiOutlineEdit, AiFillDelete } from 'react-icons/ai'
 // Redux
 import { updateProjectTask, deleteTask } from '../features/projects/projectSlice'
 import { useDispatch } from 'react-redux'
-
+// Icons
+import { AiOutlineEdit, AiFillDelete } from 'react-icons/ai'
+import { BsStar, BsStarFill } from 'react-icons/bs'
 // Components 
 import TaskForm from '../components/TaskForm'
+
 
 function Task({ task, id }) {
   const dispatch = useDispatch()
   
   const [isEditable, setIsEditable] = useState(false)
-  const [taskTitle, setTaskTitle] = useState(task)
+  const [taskTitle, setTaskTitle] = useState(task.title)
 
   const toggleEditTask = () => {
     setIsEditable(isEditable => isEditable = !isEditable)
@@ -52,27 +53,26 @@ function Task({ task, id }) {
 
   if (isEditable) {
     return (
-      <form onSubmit={handleUpdateTask} className='task-form'>
-        <div className='update-task-container'>
-          <TaskForm/>
-          <button type='submit'><AiOutlineEdit /></button>
-        </div>
-      </form>
+      <TaskForm  />
     )
   }
   else { 
     return (
       <>
-        <div className='update-task-container' >
-        <p>{task.title}</p>
-          <AiOutlineEdit onClick={toggleEditTask} size={22} />
-          <AiFillDelete onClick={handleDeleteTask} size={22} />
+        <div className='update-task-container'>
+          <div>
+            <h3>{task.title}</h3>
+            <p>{task.description}</p>
+            <p>{task.isFavorite ? (<><BsStarFill /></>) : (<><BsStar /></>)}</p>
+          </div>
+          <div>
+            <AiOutlineEdit onClick={toggleEditTask} size={22} />
+            <AiFillDelete onClick={handleDeleteTask} size={22} />
+          </div>
           </div>
       </>
     )
   }
-
-
 }
 
 export default Task
