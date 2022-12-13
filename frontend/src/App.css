@@ -69,6 +69,36 @@ button {
   cursor: pointer;
 }
 
+/*-------------------------------------- PROJECT FORM  --------------------------------------*/
+
+.project-form-container {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 8px #888888;
+  width: max-content;
+  padding: 1%;
+}
+
+.project-form-container button {
+  background-color: #2801d2;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 10px 2px;
+  cursor: pointer;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+}
+
+.project-form-container button:hover {
+  background-color: #3e8e41;
+}
+
 /* LOGIN AND REGISTER PAGES */
 
 .form-section {
