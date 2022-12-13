@@ -1,7 +1,6 @@
 // React
 import { useState,  useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-
 // Auth
 import { login, reset } from '../features/auth/authSlice'
 import { useSelector, useDispatch } from 'react-redux'
@@ -11,22 +10,22 @@ import { toast } from 'react-toastify'
 import Spinner from '../components/Spinner'
 import { FiLogIn } from 'react-icons/fi'
 
-
 const Login = () => {  
-  // State variables 
+  // State 
   const [formData, setFormData] = useState({
     email: '',
     password: '',    
   })
   
-  // Destructure state
+  // Destructured state
   const { email, password } = formData
 
-  //
+  // Constants
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth)
 
+  // Methods
   const onChange = (e) => { 
     setFormData((prevState) => ({
       ...prevState,
@@ -34,55 +33,57 @@ const Login = () => {
     }))
   }
 
+  const onSubmit = (e) => { 
+    // Prevent page reload
+    e.preventDefault()
+    // Save data
+    const userData = {
+      email,
+      password
+    }
+    // Invoke redux and backend methods
+    dispatch(login(userData))
+  }
+
   useEffect(() => {
-    // First check for errors
+    // Display errors
     if (isError) { 
       toast.error(message)
     }
-
+    // Navigate to dashboard and notify user for successful login
     if ( isSuccess && user) {
       toast.success(message)
       navigate('/dashboard')
     }
-    
-    // Reset the state
+    // Reset the redux state on component unmount
     return () => {
       dispatch(reset())
     }
 
   }, [user, isError, isSuccess, message, navigate, dispatch])
 
-
+  // Show spinner anytime network actions are happening
   if (isLoading) { 
     return <Spinner/>
   }
 
-  const onSubmit = (e) => { 
-    e.preventDefault()
-    const userData = {
-      email,
-      password
-    }
-    dispatch(login(userData))
-  }
-
   return (
     <>
-      <section className='form-section'>
-        <div>
+      <section className='login-form-section'>
+        <div className='login-form-heading-container'>
           <FiLogIn/> 
-          <h2>Login</h2>          
+          <h2>Login</h2>
         </div>
         <h5>Welcome Back</h5>
-      <form onSubmit={onSubmit}>  
-        <input
-          type="email"
-          name="email"
-          value={ email }
-          id="email"
-          placeholder='Email'
-          required
-          onChange={onChange}
+        <form onSubmit={onSubmit}>  
+          <input
+            type="email"
+            name="email"
+            value={ email }
+            id="email"
+            placeholder='Email'
+            required
+            onChange={onChange}
           />
           <input
             type="password"
@@ -91,10 +92,12 @@ const Login = () => {
             placeholder='Password'
             required
             onChange={onChange}
-          />          
-          <button className='loginRegister' type='submit'>Login</button>              
-        </form>
-        <button className='loginRegister' onClick={()=>navigate('/register')}>Register</button>
+          />
+          <div className='login-form-button-container'>
+            <button className='login-and-register-button' type='button' onClick={() => navigate('/register')}>Register</button>
+            <button className='login-and-register-button' type='submit'>Login</button>            
+          </div>
+          </form>        
         </section>
     </>
   )

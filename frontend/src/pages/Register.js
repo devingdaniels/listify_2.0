@@ -85,13 +85,13 @@ const Register = () => {
 
   return (
     <>
-      <section className='form-section'>
-        <div>
+      <section className='register-form-section'>
+        <div className='register-form-heading-container'>
           <VscAccount />
           <h2>Register</h2>
         </div>
         <h5>Sign Up</h5>
-      <form className='getUserDetailsForm' onSubmit={onSubmit}>        
+      <form onSubmit={onSubmit}>        
         <input
           type="text"
           name="fname"
@@ -131,10 +131,12 @@ const Register = () => {
             placeholder='Confirm'
             required
             onChange={onChange}
-          />        
-        <button className='loginRegister' type='submit'>Create Account</button>
+          />
+          <div className='register-form-button-container'>
+            <button className='login-and-register-button' type='button' onClick={goToLogin}>Login</button>
+            <button className='login-and-register-button' type='submit'>Create Account</button>
+          </div>
         </form>
-        <button className='loginRegister' onClick={ goToLogin }>Login</button>
         </section>
     </>
   )

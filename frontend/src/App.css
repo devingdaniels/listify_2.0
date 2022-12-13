@@ -69,6 +69,91 @@ button {
   cursor: pointer;
 }
 
+/*------------------- LOGIN AND REGISTRATION COMPONENTS  ---------------------*/
+
+.login-form-section,
+.register-form-section {
+  max-width: 40vw;
+  margin: 10% auto 0 auto;
+  padding: 3%;
+  text-align: center;
+  box-shadow: 0 0 8px #888888;
+}
+
+.login-form-heading-container,
+.register-form-heading-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 3% auto;
+  font-size: 2em;
+}
+
+.login-form-section input,
+.register-form-section input {
+  display: block;
+  background-color: rgb(76, 82, 104);
+  border: 0.5px solid #3c4fe0;
+  width: 100%;
+  height: 1.8rem;
+  margin: 5% 0;
+}
+
+.login-form-section form,
+.register-form-section form {
+  margin-bottom: 3%;
+}
+
+.login-form-button-container,
+.register-form-button-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.login-and-register-button {
+  align-items: center;
+  appearance: none;
+  background-image: radial-gradient(
+    100% 100% at 100% 0,
+    #5adaff 0,
+    #5468ff 100%
+  );
+  border: 0;
+  border-radius: 6px;
+  box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,
+    rgba(45, 35, 66, 0.3) 0 7px 13px -3px, rgba(58, 65, 111, 0.5) 0 -3px 0 inset;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  height: 28px;
+  padding-left: 20px;
+  padding-right: 20px;
+  transition: box-shadow 0.15s, transform 0.15s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  will-change: box-shadow, transform;
+}
+
+.login-and-register-button:focus {
+  box-shadow: #3c4fe0 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px,
+    rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
+}
+
+.login-and-register-button:hover {
+  box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px,
+    rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
+  transform: translateY(-2px);
+}
+
+.login-and-register-button:active {
+  box-shadow: #3c4fe0 0 3px 7px inset;
+  transform: translateY(2px);
+}
+
 /*-------------------------------------- PROJECT FORM  --------------------------------------*/
 
 .project-form-container {
@@ -99,56 +184,14 @@ button {
   background-color: #3e8e41;
 }
 
-/* LOGIN AND REGISTER PAGES */
+/*-------------------------------------- DASHBOARD COMPONENT (PAGE)  --------------------------------------*/
 
-.form-section {
-  max-width: 40vw;
-  margin: 10% auto 0 auto;
-  padding: 1%;
-  text-align: center;
-  box-shadow: 0 0 8px #888888;
-}
-
-.form-section input {
-  display: block;
-  background-color: rgb(76, 82, 104);
-  border: 0.5px solid #3c4fe0;
-  padding: 1%;
-}
-
-.form-section div {
-  display: flex;
-  align-items: center;
-  max-width: max-content;
-  margin: 0 auto 3% auto;
-  font-size: 2em;
-}
-
-.form-section h5 {
-  font-size: 1.6rem;
-}
-
-.form-section input {
-  width: 100%;
-  height: 1.8rem;
-  margin: 3% 0;
-}
-
-.form-section form {
-  margin-bottom: 3%;
-}
-
-.loadingSpinner {
-  max-width: max-content;
-  margin: 30vh auto 0 auto;
-}
-
-/* DASHBOARD */
 .dashboardContainer {
   padding: 1%;
 }
 
-/* PROJECTS */
+/*-------------------------------------- PROJECT CARD COMPONENT --------------------------------------*/
+
 .project-container {
   max-width: 40vw;
   padding: 1%;
@@ -170,6 +213,8 @@ button {
   margin-bottom: 1%;
 }
 
+/*-------------------------------------- TASK FORM COMPONENT --------------------------------------*/
+
 .task-form {
   display: flex;
   flex-direction: column;
@@ -189,6 +234,8 @@ textarea {
   display: flex;
 }
 
+/*-------------------------------------- TASK CARD COMPONENT --------------------------------------*/
+
 .task-section-button {
   background-color: #222222; /* Dark gray */
   border: none;
@@ -207,54 +254,8 @@ textarea {
   transform: translateY(-3px);
 }
 
-/* CSS */
-.loginRegister {
-  align-items: center;
-  appearance: none;
-  background-image: radial-gradient(
-    100% 100% at 100% 0,
-    #5adaff 0,
-    #5468ff 100%
-  );
-  border: 0;
-  border-radius: 6px;
-  box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,
-    rgba(45, 35, 66, 0.3) 0 7px 13px -3px, rgba(58, 65, 111, 0.5) 0 -3px 0 inset;
-  box-sizing: border-box;
-  color: #fff;
-  cursor: pointer;
-  display: inline-flex;
-  font-family: "JetBrains Mono", monospace;
-  font-size: 15px;
-  height: 28px;
-  width: max-content;
-  justify-content: center;
-  line-height: 1;
-  list-style: none;
-  overflow: hidden;
-  padding-left: 20px;
-  padding-right: 20px;
-  text-decoration: none;
-  transition: box-shadow 0.15s, transform 0.15s;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  white-space: nowrap;
-  will-change: box-shadow, transform;
-}
-
-.loginRegister:focus {
-  box-shadow: #3c4fe0 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px,
-    rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
-}
-
-.loginRegister:hover {
-  box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px,
-    rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
-  transform: translateY(-2px);
-}
-
-.loginRegister:active {
-  box-shadow: #3c4fe0 0 3px 7px inset;
-  transform: translateY(2px);
+/*-------------------------------------- SPINNER --------------------------------------*/
+.loadingSpinner {
+  max-width: max-content;
+  margin: 30vh auto 0 auto;
 }
