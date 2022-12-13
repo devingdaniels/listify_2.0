@@ -1,29 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
+/*-------------------------------------- VARIABLES  --------------------------------------*/
+
 /*-------------------------------------- GLOBAL  --------------------------------------*/
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  color: rgb(0, 252, 84);
-  pointer-events: all;
 }
 
 body {
   background-color: rgb(12, 15, 24);
   font: 1rem;
   font-family: "Fira Sans", sans-serif;
-}
-
-input {
-  font-size: 16px;
-  font-size: max(16px, 1em);
-  font-family: inherit;
-  padding: 0.25em 0.5em;
-  background-color: #fff;
-  border: 2px solid black;
-  border-radius: 4px;
-  cursor: pointer;
+  color: rgb(254, 254, 255);
 }
 
 button {
@@ -32,7 +22,6 @@ button {
 }
 
 /*-------------------------------------- HEADER COMPONENT  --------------------------------------*/
-
 .header {
   display: flex;
   justify-content: space-between;
@@ -154,6 +143,12 @@ button {
   transform: translateY(2px);
 }
 
+/*-------------------------------------- DASHBOARD COMPONENT (PAGE)  --------------------------------------*/
+
+.dashboardContainer {
+  padding: 1%;
+}
+
 /*-------------------------------------- PROJECT FORM  --------------------------------------*/
 
 .project-form-container {
@@ -168,12 +163,11 @@ button {
   background-color: #2801d2;
   border: none;
   color: white;
-  padding: 8px 16px;
+  padding: 8px 8px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
   font-size: 16px;
-  margin: 10px 2px;
+  margin: 10px 0;
   cursor: pointer;
   border-radius: 8px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -181,13 +175,7 @@ button {
 }
 
 .project-form-container button:hover {
-  background-color: #3e8e41;
-}
-
-/*-------------------------------------- DASHBOARD COMPONENT (PAGE)  --------------------------------------*/
-
-.dashboardContainer {
-  padding: 1%;
+  transform: translateY(-3px);
 }
 
 /*-------------------------------------- PROJECT CARD COMPONENT --------------------------------------*/

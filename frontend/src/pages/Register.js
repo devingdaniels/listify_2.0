@@ -1,18 +1,16 @@
-import React, { useEffect } from 'react'
-import { useState } from 'react'
+// React
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-
-
+// Redux
 import { useSelector, useDispatch } from 'react-redux'
+// Notifications
 import { toast } from 'react-toastify'
-
 // Auth
 import {register, reset } from '../features/auth/authSlice'
-
-// Spinner
+// Components
 import Spinner from '../components/Spinner'
+// Icons
 import { VscAccount } from 'react-icons/vsc'
-
 
 const Register = () => {  
   // State variables 
