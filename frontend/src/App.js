@@ -19,15 +19,11 @@ function App() {
       <Routes>        
         <Route path='/' element={<LoginPage/>}/>
         <Route path='/register' element={<Register/>}/>
-        <Route path='/dashboard' element={<DashBoard/>}/>
+        <Route path='/dashboard' element={<DashBoard />}>
+          <Route path='/dashboard/:id' element={ <h1>Hello from nested route</h1> }></Route>
+        </Route>
       </Routes>
-      <ToastContainer
-        position='top-right'
-        autoClose={1500}
-        closeOnClick
-        draggable
-        pauseOnHover
-      />      
+      <ToastContainer position='top-right' autoClose={1500} closeOnClick draggable pauseOnHover />
     </>
   );
 }

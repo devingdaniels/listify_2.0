@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Link } from 'react-router-dom'
 function DashboardNavigation({ projects }) {
     
 
@@ -8,7 +8,7 @@ function DashboardNavigation({ projects }) {
             <>
                 {
                     projects.map(el => {                        
-                        return <li key={el._id}>{el.title}</li>
+                        return <Link to={`/dashboard/${el._id}`} key={el._id}>{el.title}</Link>
                     })}
 
             </>
