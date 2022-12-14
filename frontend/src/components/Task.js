@@ -1,10 +1,10 @@
 // React
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 // Redux
 import { updateProjectTask, deleteTask } from '../features/projects/projectSlice'
 import { useDispatch } from 'react-redux'
 // Icons
-import { AiOutlineEdit, AiFillDelete } from 'react-icons/ai'
+import { AiFillDelete } from 'react-icons/ai'
 import { BsStar, BsStarFill } from 'react-icons/bs'
 // Lodash
 import lodash from 'lodash'
@@ -13,42 +13,24 @@ import { toast } from 'react-toastify'
 
 
 function Task({ oldTask }) {
+  // Hooks
   const dispatch = useDispatch()
-  
+  // State
   const [newTask, setTaskData] = useState(oldTask)
   const [isEditable, setIsEditable] = useState(false)
-  
-
-
-
-
-
-
+  // Methods
   const toggleEditTask = () => {setIsEditable(isEditable => isEditable = !isEditable)}
   const handleOnChange = (e) => { setTaskData( prevState => ({...prevState, [e.target.name]: e.target.value}))}
   const toggleTaskForm = () => { setIsEditable(isEditable => isEditable = !isEditable) }
   const toggleIsFav = () => { setTaskData( prevState => ({ ...prevState, isFavorite: !newTask.isFavorite }))}
-
-
-
-
-
-
-
-
-  const handleDeleteTask = () => {
-    // Pass ID of project and the name of the task
-    dispatch(deleteTask(newTask))
-  }
+  const handleDeleteTask = () => {dispatch(deleteTask(newTask))}
   
   const handleUpdateTask = (e) => {
     // Prevent page reload
     e.preventDefault()
-    // Pass data to reducer, which will make http PUT to backend - also need project ID for protected route
-    // Don't make network request if data has not changed
     
-    if ( lodash.isEqual (newTask, oldTask)) { 
-      toast.warn('Tasks are identical')
+    if (lodash.isEqual (newTask, oldTask)) { 
+      toast.warn('No changes to save')
       toggleEditTask()
       return 
     }
@@ -67,6 +49,16 @@ function Task({ oldTask }) {
     toggleEditTask()
 }
 
+  const handleFavClick = () => {
+    
+    toggleIsFav()
+
+  }
+
+
+  useEffect(() => { 
+
+  })
 
   if (isEditable) {
     return (
@@ -86,26 +78,27 @@ function Task({ oldTask }) {
                     placeholder='Description'
                     defaultValue={newTask.description}
                     onChange={ handleOnChange }
-                />                
-                { newTask.isFavorite ? (<><div className='isFavoriteTask'><p>Favorite: </p><BsStarFill onClick={toggleIsFav}/></div></>) : (<><div className='isFavoriteTask'><p>Favorite: </p><BsStar onClick={toggleIsFav}/></div></>)}
-                <button type='button' className='task-section-button' onClick={() => toggleTaskForm()}>Cancel</button>
-                <button type='submit' className='task-section-button'>Add</button>                     
+                />
+                { newTask.isFavorite ? (<><div className='isFavoriteTask'><span><BsStarFill onClick={toggleIsFav}/></span></div></>) : (<><div className='isFavoriteTask'><span><BsStar onClick={toggleIsFav}/></span></div></>)}
+                <div className='task-form-button-container'>
+                  <button type='button' className='task-section-button' onClick={() => toggleTaskForm()}>Cancel</button>
+                  <button type='submit' className='task-section-button'>Add</button>
+                </div>
             </form>
     )
   }
   else { 
     return (
       <>
-        <div onDoubleClick={toggleEditTask} className='update-task-container'>
-          <div>
+        <div onDoubleClick={toggleEditTask} className='task-container'>
+          <div className='task-container-task-data'>
             <h3>{oldTask.title}</h3>
             <p>{oldTask.description}</p>
-            <p>{oldTask.isFavorite ? (<><BsStarFill /></>) : (<><BsStar /></>)}</p>
-          </div>
-          <div>
-            <AiOutlineEdit onClick={toggleEditTask} size={22} />
-            <AiFillDelete onClick={handleDeleteTask} size={22} />
-          </div>
+          </div>          
+          <div className='task-container-right-section' >
+            <p >{oldTask.isFavorite ? (<><BsStarFill onClick={ handleFavClick} /></>) : (<><BsStar onClick={ handleFavClick}/></>)}</p>         
+            <AiFillDelete className='project-card-icon' onClick={handleDeleteTask} size={22} />
+            </div>
           </div>
       </>
     )

@@ -47,6 +47,7 @@ button {
 .header-logout-button {
   margin-top: 0.3rem;
   display: flex;
+  color: white;
 }
 
 .header-logout-button p {
@@ -195,6 +196,7 @@ button {
   max-width: 40vw;
   padding: 1%;
   margin: 1% auto;
+  box-shadow: 0 0 8px #888888;
 }
 
 .project-container li {
@@ -212,12 +214,23 @@ button {
   margin-bottom: 1%;
 }
 
+.project-card-icon {
+  color: red;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.project-card-icon:hover {
+  transform: translateY(-3px);
+}
+
 /*-------------------------------------- TASK FORM COMPONENT --------------------------------------*/
 
 .task-form {
   display: flex;
   flex-direction: column;
   transform: 0.3s;
+  /* padding: 0 3%; */
 }
 
 .task-form input,
@@ -225,15 +238,25 @@ textarea {
   border: none;
   border-bottom: 1px solid rgb(34, 2, 215);
   background-color: transparent;
-  margin: 1%;
   color: white;
+  margin: 3%;
+}
+
+.task-form-button-container {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 3%;
 }
 
 .isFavoriteTask {
   display: flex;
+  padding: 1%;
+  margin-left: 3%;
 }
 
-/*-------------------------------------- TASK CARD COMPONENT --------------------------------------*/
+.isFavoriteTask span {
+  margin-left: 10px;
+}
 
 .task-section-button {
   background-color: #222222; /* Dark gray */
@@ -251,6 +274,27 @@ textarea {
 
 .task-section-button:hover {
   transform: translateY(-3px);
+}
+/*-------------------------------------- TASK CARD COMPONENT --------------------------------------*/
+
+.task-container {
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0 0 8px #888888;
+  margin: 4% 0;
+  padding: 2%;
+  cursor: pointer;
+}
+
+.task-container-task-data {
+  margin: 3% 0;
+}
+
+.task-container-right-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /*-------------------------------------- SPINNER --------------------------------------*/

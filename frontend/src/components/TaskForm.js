@@ -53,9 +53,11 @@ function TaskForm({ id }) {
                     defaultValue={taskData.description}
                     onChange={ handleOnChange }
                 />                
-                { taskData.isFavorite ? (<><div className='isFavoriteTask'><p>Favorite: </p><BsStarFill onClick={toggleIsFav}/></div></>) : (<><div className='isFavoriteTask'><p>Favorite: </p><BsStar onClick={toggleIsFav}/></div></>)}
-                <button type='button' className='task-section-button' onClick={() => toggleTaskForm()}>Cancel</button>
-                <button type='submit' className='task-section-button'>Add</button>                     
+                {taskData.isFavorite ? (<><div className='isFavoriteTask'><BsStarFill onClick={toggleIsFav} /></div></>) : (<><div className='isFavoriteTask'><BsStar onClick={toggleIsFav} /></div></>)}
+                <div className='task-form-button-container'>
+                    <button type='button' className='task-section-button' onClick={() => toggleTaskForm()}>Cancel</button>
+                    <button type='submit' className='task-section-button'>Add</button>
+                </div>
             </form>
         )
     }

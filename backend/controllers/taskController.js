@@ -117,7 +117,6 @@ const deleteTask = asyncHandler(async (req, res) => {
         res.status(400)
         throw new Error('Project not found')
     }
-    
 })
 
 

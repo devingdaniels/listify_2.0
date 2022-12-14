@@ -23,11 +23,11 @@ function Project({ project }) {
     <section className='project-container'>
       <div className='project-card-heading'>
         <h2>{project.title}</h2>
-        <button><AiFillCloseCircle onClick={handleDeleteProject} size={25} /></button>
+        <button><AiFillCloseCircle onClick={handleDeleteProject} size={25} className='project-card-icon'/></button>
       </div>
       <TaskForm id={ project._id } />
       <ul>
-        {project.tasks.map((task, index) => {           
+        {project.tasks.map((task, index) => {
           return <Task key={index} oldTask={task}  />
       })}
         </ul>

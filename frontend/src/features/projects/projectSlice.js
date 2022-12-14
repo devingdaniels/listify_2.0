@@ -204,7 +204,6 @@ export const projectSlice = createSlice({
                 state.isSuccess = true
                 state.isError = false
                 // Getting an ID of deleted project from backend API
-                console.log(action.payload)
                 state.projects = state.projects.filter(project => {
                     if (project._id !== action.payload._id) {
                         return project
