@@ -61,12 +61,12 @@ export const deleteProject = createAsyncThunk('projects/deleteOne', async (id, t
 
 
 // Add a task to a given project 
-export const addTaskToProject = createAsyncThunk('projects/task/addTask', async (data, thunkAPI) => { 
-    // data = {id, data: {title, desc, isFav}}
+export const addTaskToProject = createAsyncThunk('projects/task/addTask', async (taskData, thunkAPI) => { 
+    // taskData = { title, desc, isFav, id }
     try {
         // PUT project route in DB is protected, need token
         const token = thunkAPI.getState().auth.user.token
-    return await projectService.addTaskToProject(data, token)
+    return await projectService.addTaskToProject(taskData, token)
     } catch (error) {
         const message =
         (error.response && error.response.data && error.response.data.message) ||
@@ -79,7 +79,7 @@ export const addTaskToProject = createAsyncThunk('projects/task/addTask', async 
 export const updateProjectTask = createAsyncThunk(
     'projects/task/updateTask',
     async (data, thunkAPI) => { 
-    // data = {id, taskData}
+    // data = {newTask, oldTask}
     try {
         // PUT project route in DB is protected, need token
         const token = thunkAPI.getState().auth.user.token
@@ -95,12 +95,12 @@ export const updateProjectTask = createAsyncThunk(
 
 export const deleteTask = createAsyncThunk(
     'projects/task/deleteTask',
-    async (data, thunkAPI) => { 
-    // data = {id, task}
+    async (task, thunkAPI) => { 
+    // task = {title, de, id, isFav}
     try {
         // DELETE project route in DB is protected, need token
         const token = thunkAPI.getState().auth.user.token        
-    return await projectService.deleteTask(data, token)
+    return await projectService.deleteTask(task, token)
     } catch (error) {
         const message =
         (error.response && error.response.data && error.response.data.message) ||
@@ -204,6 +204,7 @@ export const projectSlice = createSlice({
                 state.isSuccess = true
                 state.isError = false
                 // Getting an ID of deleted project from backend API
+                console.log(action.payload)
                 state.projects = state.projects.filter(project => {
                     if (project._id !== action.payload._id) {
                         return project

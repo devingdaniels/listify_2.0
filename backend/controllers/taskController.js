@@ -2,20 +2,22 @@
 const asyncHandler = require('express-async-handler')
 // Database model 
 const Project = require('../models/projectModel')
+// Lodash
+const  lodash = require('lodash') 
 
 // @desc    Add a task to a project
-// @route   POST /api/projects/api/projects/:id
+// @route   POST /api/projects/task/:id
 // @access  Private (protected)
-const addTaskToProject = asyncHandler(async (req, res) => {
+const addTaskToProject = asyncHandler(async (req, res) => {    
     // Ensure valid user
     if (!req.user) {
         console.log('Invalid user')
         throw new Error('No user found.')
     }
-
-    // Get the data
-    const { id } = req.body
-    const { title } = req.body.taskData
+    // Get the data 
+    const { title, id } = req.body
+    
+    console.log(title, id)
     
      if (title === '') { 
         res.status(400)
@@ -33,7 +35,7 @@ const addTaskToProject = asyncHandler(async (req, res) => {
 
     if (project) {
         // Add taskData to project array 
-        project.tasks.push(req.body.taskData)
+        project.tasks.push(req.body)
         // Save project
         await project.save()
         // Return new project
@@ -44,66 +46,36 @@ const addTaskToProject = asyncHandler(async (req, res) => {
     }
 })
 
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // @desc    Edit an existing task in a project
 // @route   PUT /api/projects/:id
 // @access  Private (protected)
 const updateProjectTask = asyncHandler(async (req, res) => { 
-    const { id, taskData, oldTask } = req.body
-    
-    if (taskData === '') { 
-        res.status(400)
-        throw new Error('Task needs a title')
-    }
+    const { oldTask, newTask } = req.body
     // Ensure valid user
     if (!req.user) { 
         console.log('Invalid user')
         throw new Error('No user found.')
     }
     // Ensure project exists
-    const project = await Project.findById(id)
+    const project = await Project.findById(oldTask.id)
     if (project) {
         const newTasks = project.tasks.map(task => { 
-            if (task != oldTask) {
-                return task
-            } else { 
-                return taskData
+            if ( lodash.isEqual(task, oldTask) ) {
+                return newTask
             }
+            // Keep prev tasks as they were
+            return task
         })        
+
         const updatedProject = await Project.findByIdAndUpdate(
             {
-                _id: id,                
+                _id: oldTask.id,                
             },
             {
                 tasks: newTasks
             },
             {new: true}
-        )        
+        )
         res.status(200).json(updatedProject)
     } else { 
         res.status(400)
@@ -115,30 +87,31 @@ const updateProjectTask = asyncHandler(async (req, res) => {
 // @desc    Delete an existing task in a project
 // @route   DELETE /api/projects/task/:id
 // @access  Private (protected)
-const deleteTask = asyncHandler(async (req, res) => { 
-    const { id, task } = req.body
-
+const deleteTask = asyncHandler(async (req, res) => {
+    const  data  = req.body
     // Ensure valid user
     if (!req.user) { 
         console.log('Invalid user')
         throw new Error('No user found.')
     }
     // Ensure project exists
-    const project = await Project.findById(id)
+    const project = await Project.findById(data.id)
     if (project) {
-        
-        const updatedTasks = project.tasks.filter(el => el !== task )
+        const updatedTasks = project.tasks.filter(el => { 
+            if ( !lodash.isEqual(el, data)) { 
+                return el
+            }
+        })
 
          const updatedProject = await Project.findByIdAndUpdate(
             {
-                _id: id,                
+                _id: data.id,
             },
             {
                 tasks: updatedTasks
             },
             {new: true}
         )    
-        
         res.status(200).json(updatedProject)
     } else { 
         res.status(400)

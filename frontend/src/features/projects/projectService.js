@@ -34,7 +34,7 @@ const deleteProject = async (id, token) => {
         headers: {
             authorization: `Bearer ${token}`
         }
-    }
+    }    
     // Send request with project data and bearer token
     const response = await axios.delete(API_URL + id, config)
 
@@ -42,14 +42,14 @@ const deleteProject = async (id, token) => {
 }
 
 // Add task to existing project
-const addTaskToProject = async (data, token) => {    
+const addTaskToProject = async (taskData, token) => {    
     const config = {
         headers: {
             authorization: `Bearer ${token}`
         },        
     }    
-    // Send request with project data and bearer token    
-    const response = await axios.post(API_URL + 'task/' + data.id, data, config)
+    // Send request with project data and bearer token
+    const response = await axios.post(API_URL + 'task/' + taskData.id, taskData, config)
     // Return project with updated task
     return response.data
 }
@@ -71,16 +71,16 @@ const updateProjectTask = async (data, token) => {
 
 
 // Delete existing task from a project
-const deleteTask = async (data, token) => {
+const deleteTask = async (task, token) => {
     // With axios, .delete has to be sent like below, with payload in request body along with headers
     const config = {
         headers: {
             authorization: `Bearer ${token}`
         },
-        data:data
+        data: task
     }    
-    // Send request with project data and bearer token
-    const url = API_URL + 'task/' + data.id
+    // Send request with project data and bearer token 
+    const url = API_URL + 'task/' + task.id
     
     const response = await axios.delete(url, config)
     // Return project with updated task

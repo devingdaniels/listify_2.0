@@ -13,7 +13,7 @@ function Project({ project }) {
     const dispatch = useDispatch()
 
     const handleDeleteProject = () => {
-        // Pass ID of project --> slice --> backend      
+      // Pass ID of project --> slice --> backend      
       dispatch(deleteProject(project._id))
       
       toast.success("Project delete successful")
@@ -27,8 +27,8 @@ function Project({ project }) {
       </div>
       <TaskForm id={ project._id } />
       <ul>
-      {project.tasks.map((task, index) => { 
-          return <Task key={index} task={task} id={ project._id } />
+        {project.tasks.map((task, index) => {           
+          return <Task key={index} oldTask={task}  />
       })}
         </ul>
     </section>

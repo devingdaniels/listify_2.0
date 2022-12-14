@@ -1,8 +1,14 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
+
+
+
+
+
+
+
 function DashboardNavigation({ projects }) {
     
-
     if (projects) {
         return (
             <>
@@ -10,7 +16,7 @@ function DashboardNavigation({ projects }) {
                     projects.map(el => {                        
                         return <Link to={`/dashboard/${el._id}`} key={el._id}>{el.title}</Link>
                     })}
-
+                <Outlet/>
             </>
         )
     } else { 

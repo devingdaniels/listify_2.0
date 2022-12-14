@@ -29,13 +29,12 @@ function DashBoard() {
     if (user !== null) {
       // Dispatch and fetch all projects from DB, will go into projects variable
       dispatch(getAllProjects())
-      
     } else {       
       navigate('/') 
     }
     
     if (isError) {       
-      toast.error(message)
+      toast.error(message)      
     }
     
     // Perform an action during component unmount by adding return statement
@@ -54,7 +53,7 @@ function DashBoard() {
       <Header />
       <section className='dashboard-grid-container'>
         <ProjectForm />
-        <DashboardNavigation projects={projects} />        
+        {/* <DashboardNavigation projects={projects} /> */}
         <div>
           {projects.map((project) => {           
             return <Project key={project._id} project={ project} />
