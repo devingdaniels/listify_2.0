@@ -7,6 +7,7 @@ import ProjectForm from '../components/ProjectForm'
 import Project from '../components/Project'
 import Spinner from '../components/Spinner'
 import Header from '../components/Header'
+import DashboardNavigation from '../components/DashboardNavigation'
 
 // Redux
 import { useSelector, useDispatch } from 'react-redux';
@@ -18,6 +19,7 @@ import { toast } from 'react-toastify'
 function DashBoard() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
+
   // Save the current logged in user
   const { user } = useSelector((state)=> state.auth)
   const { projects, isLoading, isError, message } = useSelector((state) => state.projects)
@@ -40,6 +42,7 @@ function DashBoard() {
     return () => { 
       dispatch(reset())
     }
+
   },[user, isError, message, dispatch, navigate])
 
   if (isLoading) { 
@@ -49,12 +52,15 @@ function DashBoard() {
   return (
     <>
       <Header />
-      <section className='dashboardContainer'>      
-        <ProjectForm />        
-        {projects.map((project) => {           
-          return <Project key={project._id} project={ project} />
-        }) }        
-    </section>    
+      <section className='dashboard-grid-container'>
+        <ProjectForm />
+        <DashboardNavigation projects={projects} />        
+        <div>
+          {projects.map((project) => {           
+            return <Project key={project._id} project={ project} />
+          })}
+        </div>
+    </section>
     </>
   )
 }
