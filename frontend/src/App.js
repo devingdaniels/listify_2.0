@@ -23,7 +23,7 @@ function App() {
         <Route path='/' element={<LoginPage/>}/>
         <Route path='register' element={<Register/>}/>
         <Route path='dashboard/' element={<DashBoard/>} >
-          <Route path=':id' element={<Project  />} />
+          <Route path=':id' element={<Project/>} />
         </Route> 
       </Routes>
       <ToastContainer position='top-right' autoClose={1500} closeOnClick draggable pauseOnHover />

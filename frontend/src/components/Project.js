@@ -14,19 +14,18 @@ import TaskForm from '../components/TaskForm'
 
 function Project() {
 
-    const dispatch = useDispatch()
-    const location = useLocation()
-    const { project } = location.state
-
+  const dispatch = useDispatch()
+  const location = useLocation()
+  const { project } = location.state
   
+// Methods
+  const handleDeleteProject = () => {
+    // Pass ID of project --> slice --> backend      
+    dispatch(deleteProject(project._id))
+    toast.success("Project delete successful")
+  }
 
-    const handleDeleteProject = () => {
-      // Pass ID of project --> slice --> backend
-      
-      dispatch(deleteProject(project._id))
-      toast.success("Project delete successful")
-    }
-  
+    
   return (
     <section className='project-container'>
       <div className='project-card-heading'>

@@ -17,7 +17,7 @@ function DashBoard() {
 
   // Save the current logged in user
   const { user } = useSelector((state)=> state.auth)
-  const { projects, isLoading, isError, message, isSuccess } = useSelector((state) => state.projects)
+  const { projects, isLoading, isError, message } = useSelector((state) => state.projects)
 
   useEffect(() => {    
 
@@ -37,17 +37,13 @@ function DashBoard() {
       dispatch(reset())
     }
 
-  },[user, isError, message, dispatch, navigate])
-
-
-  const refreshProjects = () => { 
-    dispatch(getAllProjects())
-  }
+  }, [ user, isError, message , dispatch, navigate ])
 
   if (isLoading) { 
     return <Spinner/>
   }
 
+  
   return (
     <>
       <Header />

@@ -121,7 +121,7 @@ export const projectSlice = createSlice({
             
             // CREATE A PROJECT
             .addCase(createProject.pending, (state) => { 
-            state.isLoading = true            
+            state.isLoading = true        
             })
             .addCase(createProject.fulfilled, (state, action) => { 
                 state.isLoading = false            
