@@ -5,6 +5,7 @@ For HOSTING, ensure to npm install cors and add function
 const express = require('express')
 const dotenv = require('dotenv').config()
 const port = process.env.PORT
+const cors = require('cors')
 
 // Instance of express
 const app = express()
@@ -17,6 +18,7 @@ connectDB()
 const { errorHandler } = require('./middleware/errorMiddleware')
 
 // express.json() and express.urlencoded are middleware functions that help handle PUT and POST requests as these types have data in the body. Inform express that data is JSON
+app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 

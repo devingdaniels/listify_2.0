@@ -49,16 +49,6 @@ function Task({ oldTask }) {
     toggleEditTask()
 }
 
-  const handleFavClick = () => {
-    
-    toggleIsFav()
-
-  }
-
-
-  useEffect(() => { 
-
-  })
 
   if (isEditable) {
     return (
@@ -96,7 +86,7 @@ function Task({ oldTask }) {
             <p>{oldTask.description}</p>
           </div>          
           <div className='task-container-right-section' >
-            <p >{oldTask.isFavorite ? (<><BsStarFill onClick={ handleFavClick} /></>) : (<><BsStar onClick={ handleFavClick}/></>)}</p>         
+            <p >{oldTask.isFavorite ? (<><BsStarFill/></>) : (<><BsStar /></>)}</p>         
             <AiFillDelete className='project-card-icon' onClick={handleDeleteTask} size={22} />
             </div>
           </div>

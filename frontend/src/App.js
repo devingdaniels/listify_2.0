@@ -13,15 +13,18 @@ import LoginPage from './pages/Login'
 import Register from './pages/Register';
 import DashBoard from './pages/DashBoard'
 
+// Component
+import Project from './components/Project'
+
 function App() {
   return (
     <>
       <Routes>        
         <Route path='/' element={<LoginPage/>}/>
-        <Route path='/register' element={<Register/>}/>
-        <Route path='/dashboard' element={<DashBoard />}>
-          <Route path='/dashboard/:id' element={ <h1>Hello from nested route</h1> }></Route>
-        </Route>
+        <Route path='register' element={<Register/>}/>
+        <Route path='dashboard/' element={<DashBoard/>} >
+          <Route path=':id' element={<Project />} />
+        </Route> 
       </Routes>
       <ToastContainer position='top-right' autoClose={1500} closeOnClick draggable pauseOnHover />
     </>

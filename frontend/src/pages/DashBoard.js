@@ -1,18 +1,13 @@
 // React
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-
+import { useNavigate , Link, Outlet} from 'react-router-dom';
 // Components
 import ProjectForm from '../components/ProjectForm'
-import Project from '../components/Project'
 import Spinner from '../components/Spinner'
 import Header from '../components/Header'
-import DashboardNavigation from '../components/DashboardNavigation'
-
 // Redux
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllProjects, reset} from '../features/projects/projectSlice';
-
 // Notifications
 import { toast } from 'react-toastify'
 
@@ -44,6 +39,8 @@ function DashBoard() {
 
   },[user, isError, message, dispatch, navigate])
 
+
+
   if (isLoading) { 
     return <Spinner/>
   }
@@ -53,13 +50,14 @@ function DashBoard() {
       <Header />
       <section className='dashboard-grid-container'>
         <ProjectForm />
-        {/* <DashboardNavigation projects={projects} /> */}
         <div>
-          {projects.map((project) => {           
-            return <Project key={project._id} project={ project} />
+          {projects.map((project) => {
+            return <Link to={{ pathname: `/dashboard/${project._id}` }} key={project._id}  state={{project: project}}> {project.title}
+            </Link>
           })}
         </div>
-    </section>
+        <Outlet/>
+      </section>
     </>
   )
 }
