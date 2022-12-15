@@ -17,7 +17,7 @@ function DashBoard() {
 
   // Save the current logged in user
   const { user } = useSelector((state)=> state.auth)
-  const { projects, isLoading, isError, message } = useSelector((state) => state.projects)
+  const { projects, isLoading, isError, message, isSuccess } = useSelector((state) => state.projects)
 
   useEffect(() => {    
 
@@ -40,6 +40,9 @@ function DashBoard() {
   },[user, isError, message, dispatch, navigate])
 
 
+  const refreshProjects = () => { 
+    dispatch(getAllProjects())
+  }
 
   if (isLoading) { 
     return <Spinner/>
@@ -52,7 +55,7 @@ function DashBoard() {
         <ProjectForm />
         <div>
           {projects.map((project) => {
-            return <Link to={{ pathname: `/dashboard/${project._id}` }} key={project._id}  state={{project: project}}> {project.title}
+            return <Link to={{ pathname: `/dashboard/${project._id}` }} key={project._id} state={{ project: project }}> {project.title}
             </Link>
           })}
         </div>

@@ -1,11 +1,11 @@
 // React
 import { useLocation } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 // Redux
-import { deleteProject, getAllProjects } from '../features/projects/projectSlice'
+import { deleteProject, getAllProjects, reset } from '../features/projects/projectSlice'
 // Icons
 import {AiFillCloseCircle } from 'react-icons/ai'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 // Notifications
 import { toast } from 'react-toastify'
 // Components
@@ -18,12 +18,14 @@ function Project() {
     const location = useLocation()
     const { project } = location.state
 
+  
+
     const handleDeleteProject = () => {
-      // Pass ID of project --> slice --> backend      
+      // Pass ID of project --> slice --> backend
+      
       dispatch(deleteProject(project._id))
       toast.success("Project delete successful")
     }
-  
   
   return (
     <section className='project-container'>
