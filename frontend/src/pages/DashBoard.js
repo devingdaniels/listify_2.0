@@ -1,6 +1,7 @@
 // React
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate , Link, Outlet} from 'react-router-dom';
+
 // Components
 import ProjectForm from '../components/ProjectForm'
 import Spinner from '../components/Spinner'
@@ -11,6 +12,8 @@ import { getAllProjects, reset} from '../features/projects/projectSlice';
 // Notifications
 import { toast } from 'react-toastify'
 
+import Project from '../components/Project'
+
 function DashBoard() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -19,8 +22,11 @@ function DashBoard() {
   const { user } = useSelector((state)=> state.auth)
   const { projects, isLoading, isError, message } = useSelector((state) => state.projects)
 
+
+
   useEffect(() => {    
 
+    console.log('useEffect in dash called')
     if (user !== null) {
       // Dispatch and fetch all projects from DB, will go into projects variable
       dispatch(getAllProjects())
@@ -37,13 +43,13 @@ function DashBoard() {
       dispatch(reset())
     }
 
-  }, [ user, isError, message , dispatch, navigate ])
+  }, [ user, isError, message, dispatch, navigate ])
+
 
   if (isLoading) { 
     return <Spinner/>
   }
 
-  
   return (
     <>
       <Header />
@@ -51,8 +57,8 @@ function DashBoard() {
         <ProjectForm />
         <div>
           {projects.map((project) => {
-            return <Link to={{ pathname: `/dashboard/${project._id}` }} key={project._id} state={{ project: project }}> {project.title}
-            </Link>
+            // return <Project key={project._id} project={ project} />
+            return <Link to={{pathname:`/dashboard/${project._id}`}} relative='path' key={project._id} state={{ project: project }}>{project.title}</Link>
           })}
         </div>
         <Outlet/>

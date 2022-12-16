@@ -1,31 +1,36 @@
 // React
-import { useLocation } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useLocation , useNavigate, useParams} from 'react-router-dom'
 // Redux
-import { deleteProject, getAllProjects, reset } from '../features/projects/projectSlice'
+import { deleteProject } from '../features/projects/projectSlice'
 // Icons
 import {AiFillCloseCircle } from 'react-icons/ai'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 // Notifications
 import { toast } from 'react-toastify'
 // Components
 import Task from '../components/Task'
 import TaskForm from '../components/TaskForm'
+import { useEffect, useState} from 'react'
 
 function Project() {
-
+  
   const dispatch = useDispatch()
   const location = useLocation()
   const { project } = location.state
+
+  const { id } = useParams()
+  console.log(id)
+
+  
   
 // Methods
   const handleDeleteProject = () => {
     // Pass ID of project --> slice --> backend      
-    dispatch(deleteProject(project._id))
-    toast.success("Project delete successful")
+    dispatch(deleteProject(project._id))    
+    toast.success("Project delete successful")        
   }
 
-    
+ 
   return (
     <section className='project-container'>
       <div className='project-card-heading'>
