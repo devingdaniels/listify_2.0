@@ -17,8 +17,6 @@ const addTaskToProject = asyncHandler(async (req, res) => {
     // Get the data 
     const { title, id } = req.body
     
-    console.log(title, id)
-    
      if (title === '') { 
         res.status(400)
         throw new Error('Task needs a title')

@@ -12,17 +12,12 @@ import Task from '../components/Task'
 import TaskForm from '../components/TaskForm'
 import { useEffect, useState} from 'react'
 
-function Project() {
+function Project({ project }) {
   
   const dispatch = useDispatch()
-  const location = useLocation()
-  const { project } = location.state
+  // const location = useLocation()
+  // let { project } = location.state
 
-  const { id } = useParams()
-  console.log(id)
-
-  
-  
 // Methods
   const handleDeleteProject = () => {
     // Pass ID of project --> slice --> backend      

@@ -13,6 +13,7 @@ import { getAllProjects, reset} from '../features/projects/projectSlice';
 import { toast } from 'react-toastify'
 
 import Project from '../components/Project'
+import ProjectNav from '../components/ProjectNav';
 
 function DashBoard() {
   const navigate = useNavigate()
@@ -26,7 +27,6 @@ function DashBoard() {
 
   useEffect(() => {    
 
-    console.log('useEffect in dash called')
     if (user !== null) {
       // Dispatch and fetch all projects from DB, will go into projects variable
       dispatch(getAllProjects())
@@ -56,12 +56,14 @@ function DashBoard() {
       <section className='dashboard-grid-container'>
         <ProjectForm />
         <div>
-          {projects.map((project) => {
-            // return <Project key={project._id} project={ project} />
-            return <Link to={{pathname:`/dashboard/${project._id}`}} relative='path' key={project._id} state={{ project: project }}>{project.title}</Link>
+          {projects.map((project, index) => {
+            return <>
+              {/* <ProjectNav key={index} project={ project } /> */}
+              {/* <Project key={ project._id + index } project={ project} /> */}
+            </> 
           })}
-        </div>
-        <Outlet/>
+          <Outlet />
+        </div>        
       </section>
     </>
   )
