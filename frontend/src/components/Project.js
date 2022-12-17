@@ -1,5 +1,3 @@
-// React
-import { useLocation , useNavigate, useParams} from 'react-router-dom'
 // Redux
 import { deleteProject } from '../features/projects/projectSlice'
 // Icons
@@ -10,13 +8,10 @@ import { toast } from 'react-toastify'
 // Components
 import Task from '../components/Task'
 import TaskForm from '../components/TaskForm'
-import { useEffect, useState} from 'react'
 
-function Project() {
+function Project({ project }) {
   
-  const dispatch = useDispatch()
-  const location = useLocation()
-  let { project } = location.state
+  const dispatch = useDispatch() 
 
 // Methods
   const handleDeleteProject = () => {
@@ -25,7 +20,6 @@ function Project() {
     toast.success("Project delete successful")        
   }
 
- 
   return (
     <section className='project-container'>
       <div className='project-card-heading'>

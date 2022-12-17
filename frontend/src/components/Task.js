@@ -1,5 +1,5 @@
 // React
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 // Redux
 import { updateProjectTask, deleteTask } from '../features/projects/projectSlice'
 import { useDispatch } from 'react-redux'

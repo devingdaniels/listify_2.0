@@ -3,7 +3,7 @@ import './App.css';
 import 'react-toastify/dist/ReactToastify.css'
 // App dependencies 
 import React from 'react';
-import { Routes, Route, Switch  } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 
 // For notifications
 import { ToastContainer } from 'react-toastify'

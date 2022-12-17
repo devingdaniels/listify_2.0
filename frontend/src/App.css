@@ -149,16 +149,8 @@ button {
 
 .dashboard-grid-container {
   display: grid;
+  grid-template-columns: repeat(auto-fill, minMax(200px, 1fr));
   padding: 1%;
-}
-
-.dashboard-grid-item-1 {
-}
-
-.dashboard-grid-item-2 {
-}
-
-.dashboard-grid-item-3 {
 }
 
 /*-------------------------------------- PROJECT FORM  --------------------------------------*/
@@ -169,6 +161,7 @@ button {
   box-shadow: 0 0 8px #888888;
   width: max-content;
   padding: 1%;
+  margin: auto;
 }
 
 .project-form-container button {
@@ -194,8 +187,8 @@ button {
 
 .project-container {
   max-width: 40vw;
-  padding: 1%;
-  margin: 1% auto;
+  padding: 3%;
+  margin: 5%;
   box-shadow: 0 0 8px #888888;
 }
 
