@@ -15,6 +15,8 @@ import { toast } from 'react-toastify'
 import Project from '../components/Project'
 import ProjectNav from '../components/ProjectNav';
 
+import { v4 } from 'uuid'
+
 function DashBoard() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -56,14 +58,14 @@ function DashBoard() {
       <section className='dashboard-grid-container'>
         <ProjectForm />
         <div>
-          {projects.map((project, index) => {
-            return <>
-              {/* <ProjectNav key={index} project={ project } /> */}
-              {/* <Project key={ project._id + index } project={ project} /> */}
-            </> 
+          {projects.map((project) => {
+            console.log(project) 
+            return <div key={project._id}>
+              <ProjectNav project={project} />
+            </div>
           })}
           <Outlet />
-        </div>        
+        </div>
       </section>
     </>
   )

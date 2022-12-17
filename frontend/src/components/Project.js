@@ -12,11 +12,11 @@ import Task from '../components/Task'
 import TaskForm from '../components/TaskForm'
 import { useEffect, useState} from 'react'
 
-function Project({ project }) {
+function Project() {
   
   const dispatch = useDispatch()
-  // const location = useLocation()
-  // let { project } = location.state
+  const location = useLocation()
+  let { project } = location.state
 
 // Methods
   const handleDeleteProject = () => {
@@ -32,12 +32,10 @@ function Project({ project }) {
         <h2>{project.title}</h2>
         <button><AiFillCloseCircle onClick={handleDeleteProject} size={25} className='project-card-icon'/></button>
       </div>
-      <TaskForm id={ project._id } />
-      <ul>
+      <TaskForm id={ project._id } />      
         {project.tasks.map((task, index) => {
           return <Task key={index} oldTask={task}  />
       })}
-        </ul>
     </section>
   )
 }
